@@ -37,7 +37,7 @@ class WarYes(commands.Cog):
         description="")
     @option("unit", description="The unit you wish to retrieve details for.",
             autocomplete=basic_autocomplete(unitAutocomplete))
-    @commands.has_any_role('WARYES DEVELOPER')
+    @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
     async def unitget(self, ctx: ctx_parse,
                       unit: str):
         try:
