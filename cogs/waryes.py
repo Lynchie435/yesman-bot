@@ -165,6 +165,10 @@ class WarYes(commands.Cog):
                 return '<:11e:1073600137374474270>'
             case 'Descriptor_Deck_Division_FR_5e_Blindee_multi':
                 return '<:5e:1073600129828929567>'
+            case 'Descriptor_Deck_Division_SOV_119IndTkBrig_multi':
+                return '<:119:1128418744465633351>'
+            case 'Descriptor_Deck_Division_US_11ACR_multi':
+                return '<:11acr:1128418742561427725>'
         return 'None'
 
     def get_weapontype(self, weaponminmax):
