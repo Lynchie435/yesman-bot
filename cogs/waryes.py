@@ -106,7 +106,7 @@ class WarYes(commands.Cog):
                         embedvar.add_field(name="",
                                            value=f"**{weapon['weaponName']} [{self.get_weapontype(weapon['minMaxCategory'])}] ** \n **Traits**: {traits} \n **Range**: GRD: {weapon['groundRange']}m | HELO: {weapon['helicopterRange']}m | AIR: {weapon['planeRange']}m "
                                                  f"\n**Power**: AP: {weapon['penetration']} | HE: {weapon['he']} "
-                                                 f"\n**Accuracy**: Static: {weapon['staticAccuracy']}% | Moving: {weapon['staticAccuracy']}%"
+                                                 f"\n**Accuracy**: Static: {weapon['staticAccuracy']}% | Moving: {weapon['movingAccuracy']}%"
                                                  f"\n**Attribs**: RoF: {weapon['rateOfFire']} p/min | Aim: {weapon['aimingTime']}s | Reload: {weapon['reloadTime']}s | Salvo: {weapon['salvoLength']}",
                                            inline=False)
 
