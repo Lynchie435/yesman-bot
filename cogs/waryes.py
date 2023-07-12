@@ -30,7 +30,7 @@ class WarYes(commands.Cog):
             units = data["units"]
 
         # list of units
-        return [f"{sub['name']} ({sub['unitType']['motherCountry']})" for sub in units]
+        return [f"{sub['name']} :{sub['unitType']['motherCountry']}:" for sub in units]
 
     @grp.command(
         guild_ids=["601387976370683906"],
@@ -42,8 +42,8 @@ class WarYes(commands.Cog):
                       unit: str):
         try:
 
-            unitname = unit.split('(')[0].rstrip()
-            unitcountry = re.search(r"\(([A-Za-z0-9_]+)\)", unit).group(1)
+            unitname = unit.split(':')[0].rstrip()
+            unitcountry = re.search(r"\:([A-Za-z0-9_]+)\:", unit).group(1)
 
             # global unitarray
             unitarray = next(
