@@ -26,7 +26,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    #await message.channel.send("Herro!")
+    #await message.channel.send("Herro!")\
 
 
 # Starts the bot

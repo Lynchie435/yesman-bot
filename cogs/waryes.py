@@ -174,13 +174,13 @@ class WarYes(commands.Cog):
     def get_flag(self, nation):
         match nation:
             case 'DDR':
-                return ':DDR:'
+                return '<:ddr:1129317328270655608>'
             case 'US':
                 return ':flag_us:'
             case 'UK':
                 return ':flag_gb:'
             case 'SOV':
-                return ':SOV:'
+                return '<:sov:1129317330468475051>'
             case 'FR':
                 return ':flag_fr:'
             case 'RFA':
