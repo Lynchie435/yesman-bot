@@ -1,7 +1,6 @@
 import discord
 import os
 import dotenv
-from discord.ext import commands
 
 # initialisation commands
 bot = discord.Bot()
