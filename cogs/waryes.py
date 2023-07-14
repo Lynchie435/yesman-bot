@@ -53,7 +53,7 @@ class WarYes(commands.Cog):
 
             if unitarray is not None:
 
-                embedvar = discord.Embed(title=f"{unitarray['name']} - {unitarray['unitType']['motherCountry']}",
+                embedvar = discord.Embed(title=f"{unitarray['name']} {self.get_flag(unitarray['unitType']['motherCountry'])}",
                                          colour=discord.Colour.random())
                 embedvar.set_author(name=f"Click Here For More Details!",
                                     url=f"https://war-yes.com/unit/{unitarray['descriptorName']}",
@@ -170,6 +170,22 @@ class WarYes(commands.Cog):
             case 'Descriptor_Deck_Division_US_11ACR_multi':
                 return '<:11acr:1128418742561427725>'
         return 'None'
+
+    def get_flag(self, nation):
+        match nation:
+            case 'DDR':
+                return ':DDR:'
+            case 'US':
+                return ':flag_us:'
+            case 'UK':
+                return ':flag_gb:'
+            case 'SOV':
+                return ':SOV:'
+            case 'FR':
+                return ':flag_fr:'
+            case 'RFA':
+                return ':flag_de:'
+
 
     def get_weapontype(self, weaponminmax):
         match weaponminmax:
