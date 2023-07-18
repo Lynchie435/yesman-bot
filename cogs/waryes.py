@@ -1,5 +1,6 @@
-from io import BytesIO
+import io
 import json
+import random
 import re
 import requests
 from PIL import Image
@@ -7,9 +8,9 @@ import discord
 from discord import option
 from discord.ext import commands
 from discord.utils import basic_autocomplete
+import pandas as pd
 
 units = []
-
 
 class WarYes(commands.Cog):
     ctx_parse = discord.ApplicationContext
@@ -18,27 +19,108 @@ class WarYes(commands.Cog):
         self.bot = bot.user
 
     grp = discord.SlashCommandGroup("waryes", "This is a collection of waryes commands")
+    unitgrp = grp.create_subgroup("units", "A list of unit commands")
+    mapgrp = grp.create_subgroup("maps", "A list of map commands")
+
+    @staticmethod
+    def gametypeAutocomplete(self: discord.AutocompleteContext):
+        try:
+            mapdf = pd.read_json('./resources/maplist.json')
+            df = mapdf
+            gametypelist = list(df["Type"].drop_duplicates())
+            return gametypelist
+        except Exception as e:
+            print(e)
+
+    @staticmethod
+    def playerNoAutocomplete(self: discord.AutocompleteContext):
+        try:
+            chosen_game_type = self.options.get('gametype')
+
+            mapdf = pd.read_json('./resources/maplist.json')
+            df = mapdf
+            df = df.loc[df['Type'] == f'{chosen_game_type}']
+
+            playerno_list = list(df["Players"].drop_duplicates().sort_values())
+            return playerno_list
+        except Exception as e:
+            print(e)
+
+    @staticmethod
+    def mapnameAutocomplete(self: discord.AutocompleteContext):
+        try:
+            chosen_game_type = self.options.get('gametype')
+            chosen_player_no = self.options.get('playerno')
+
+            mapdf = pd.read_json('./resources/maplist.json')
+            df = mapdf
+            df = df.loc[(df['Type'] == f'{chosen_game_type}') & (df['Players'] == chosen_player_no)]
+
+            map_list = list(df["Name"].drop_duplicates().sort_values())
+            return map_list
+        except Exception as e:
+            print(e)
 
     @staticmethod
     def unitAutocomplete(self: discord.AutocompleteContext):
-        with open('./resources/units.json') as f:
-            # load json
-            data = json.load(f)
+        try:
+            with open('./resources/units.json') as f:
+                # load json
+                data = json.load(f)
 
-            # get units from json
-            global units
-            units = data["units"]
+                # get units from json
+                global units
+                units = data["units"]
 
-        # list of units
-        return [f"{sub['name']} :{sub['unitType']['motherCountry']}:" for sub in units]
+            # list of units
+            return [f"{sub['name']} :{sub['unitType']['motherCountry']}:" for sub in units]
+        except Exception as e:
+            print(e)
 
-    @grp.command(
+    @mapgrp.command(
+        guild_ids=["601387976370683906"],
+        description="")
+    @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
+    async def getranked(self, ctx: ctx_parse):
+        try:
+            mapdf = pd.read_json('./resources/maplist.json')
+            df = mapdf.loc[mapdf['RankedPool'] == True]
+
+            map = random.choice(list(df["Name"].drop_duplicates().sort_values()))
+
+            await ctx.respond(f"You have drawn **{map}**")
+        except Exception as e:
+            print(e)
+
+    @mapgrp.command(
+        guild_ids=["601387976370683906"],
+        description="")
+    @option("gametype", description="WARNO Game Mode",
+            autocomplete=basic_autocomplete(gametypeAutocomplete))
+    @option("playerno", description="Max Players",
+            autocomplete=basic_autocomplete(playerNoAutocomplete))
+    @option("mapname", description="Map Name",
+            autocomplete=basic_autocomplete(mapnameAutocomplete))
+    @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
+    async def getoverview(self, ctx: ctx_parse,
+                     gametype: str, playerno: int, mapname: str):
+        try:
+            mapdf = pd.read_json('./resources/maplist.json')
+            df = mapdf.loc[
+                (mapdf['Type'] == f'{gametype}') & (mapdf['Players'] == playerno) & (mapdf['Name'] == f'{mapname}')]
+            url = f"https://war-yes.com/{df['ImageURL'].iloc[0]}"
+
+            await ctx.respond(f"{url}")
+        except Exception as e:
+            print(e)
+
+    @unitgrp.command(
         guild_ids=["601387976370683906"],
         description="")
     @option("unit", description="The unit you wish to retrieve details for.",
             autocomplete=basic_autocomplete(unitAutocomplete))
     @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
-    async def unitget(self, ctx: ctx_parse,
+    async def getunit(self, ctx: ctx_parse,
                       unit: str):
         try:
 
@@ -53,8 +135,9 @@ class WarYes(commands.Cog):
 
             if unitarray is not None:
 
-                embedvar = discord.Embed(title=f"{unitarray['name']} {self.get_flag(unitarray['unitType']['motherCountry'])}",
-                                         colour=discord.Colour.random())
+                embedvar = discord.Embed(
+                    title=f"{unitarray['name']} {self.get_flag(unitarray['unitType']['motherCountry'])}",
+                    colour=discord.Colour.random())
                 embedvar.set_author(name=f"Click Here For More Details!",
                                     url=f"https://war-yes.com/unit/{unitarray['descriptorName']}",
                                     icon_url="https://war-yes.com/a973a55405dd1851cc9a.png")
@@ -186,7 +269,6 @@ class WarYes(commands.Cog):
             case 'RFA':
                 return ':flag_de:'
 
-
     def get_weapontype(self, weaponminmax):
         match weaponminmax:
             case 'MinMax_SAM':
@@ -221,7 +303,7 @@ class WarYes(commands.Cog):
 
     async def resize_image_from_url(self, image_url, new_width, new_height):
         response = requests.get(image_url)
-        image = Image.open(BytesIO(response.content))
+        image = Image.open(io.BytesIO(response.content))
         resized_image = image.resize((new_width, new_height))
         resized_image.save("resized_image.png")  # Save the resized image
         return "resized_image.png"

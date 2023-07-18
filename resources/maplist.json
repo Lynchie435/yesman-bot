@@ -1,0 +1,370 @@
+[
+ {
+   "Image": "blackforest_conquest_4.png",
+   "Name": "Black Forest",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/blackforest_conquest_4.png",
+   "RankedPool": true
+ },
+ {
+   "Image": "chemical_conquest_4.png",
+   "Name": "Chemical",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/chemical_conquest_4.png",
+   "RankedPool": true
+ },
+ {
+   "Image": "chemical_conquest_8.png",
+   "Name": "Chemical",
+   "Type": "Conquest",
+   "Players": 8,
+   "ImageURL": "images/maps/chemical_conquest_8.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "chemical_destruction_8.png",
+   "Name": "Chemical",
+   "Type": "Destruction",
+   "Players": 8,
+   "ImageURL": "images/maps/chemical_destruction_8.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "crown_conquest_20.png",
+   "Name": "Crown",
+   "Type": "Conquest",
+   "Players": 20,
+   "ImageURL": "images/maps/crown_conquest_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "crown_destruction_20.png",
+   "Name": "Crown",
+   "Type": "Destruction",
+   "Players": 20,
+   "ImageURL": "images/maps/crown_destruction_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "cyrus_conquest_6.png",
+   "Name": "Cyrus",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/cyrus_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "cyrus_destruction_6.png",
+   "Name": "Cyrus",
+   "Type": "Destruction",
+   "Players": 6,
+   "ImageURL": "images/maps/cyrus_destruction_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "dangerhills_conquest_6.png",
+   "Name": "Danger Hills",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/dangerhills_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "dangerhills_destruction_6.png",
+   "Name": "Danger Hills",
+   "Type": "Destruction",
+   "Players": 6,
+   "ImageURL": "images/maps/dangerhills_destruction_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "darkstream_conquest_8.png",
+   "Name": "Dark Stream",
+   "Type": "Conquest",
+   "Players": 8,
+   "ImageURL": "images/maps/darkstream_conquest_8.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "darkstream_conquest_20.png",
+   "Name": "Dark Stream",
+   "Type": "Conquest",
+   "Players": 20,
+   "ImageURL": "images/maps/darkstream_conquest_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "deathrow_conquest_2.png",
+   "Name": "Death Row",
+   "Type": "Conquest",
+   "Players": 2,
+   "ImageURL": "images/maps/deathrow_conquest_2.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "deathrow_conquest_4.png",
+   "Name": "Death Row",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/deathrow_conquest_4.png",
+   "RankedPool": true
+ },
+ {
+   "Image": "deathrow_destruction_4.png",
+   "Name": "Death Row",
+   "Type": "Destruction",
+   "Players": 4,
+   "ImageURL": "images/maps/deathrow_destruction_4.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "geisa_conquest_2.png",
+   "Name": "Geisa",
+   "Type": "Conquest",
+   "Players": 2,
+   "ImageURL": "images/maps/geisa_conquest_2.png",
+   "RankedPool": true
+ },
+ {
+   "Image": "geisa_conquest_20.png",
+   "Name": "Geisa",
+   "Type": "Conquest",
+   "Players": 20,
+   "ImageURL": "images/maps/geisa_conquest_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "geisa_destruction_20.png",
+   "Name": "Geisa",
+   "Type": "Destruction",
+   "Players": 20,
+   "ImageURL": "images/maps/geisa_destruction_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "ironwaters_conquest_20.png",
+   "Name": "Iron Waters",
+   "Type": "Conquest",
+   "Players": 20,
+   "ImageURL": "images/maps/ironwaters_conquest_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "ironwaters_destruction_20.png",
+   "Name": "Iron Waters",
+   "Type": "Destruction",
+   "Players": 20,
+   "ImageURL": "images/maps/ironwaters_destruction_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "loop_conquest_4.png",
+   "Name": "Loop",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/loop_conquest_4.png",
+   "RankedPool": true
+ },
+ {
+   "Image": "loop_conquest_20.png",
+   "Name": "Loop",
+   "Type": "Conquest",
+   "Players": 20,
+   "ImageURL": "images/maps/loop_conquest_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "loop_destruction_20.png",
+   "Name": "Loop",
+   "Type": "Destruction",
+   "Players": 20,
+   "ImageURL": "images/maps/loop_destruction_20.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "mountriver_conquest_2.png",
+   "Name": "Mount River",
+   "Type": "Conquest",
+   "Players": 2,
+   "ImageURL": "images/maps/mountriver_conquest_2.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "mountriver_conquest_4.png",
+   "Name": "Mount River",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/mountriver_conquest_4.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "mountriver_conquest_6.png",
+   "Name": "Mount River",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/mountriver_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "mountriver_destruction_6.png",
+   "Name": "Mount River",
+   "Type": "Destruction",
+   "Players": 6,
+   "ImageURL": "images/maps/mountriver_destruction_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "rift_conquest_6.png",
+   "Name": "Rift",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/rift_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "rift_destruction_6.png",
+   "Name": "Rift",
+   "Type": "Destruction",
+   "Players": 6,
+   "ImageURL": "images/maps/rift_destruction_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "ripple_conquest_4.png",
+   "Name": "Ripple",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/ripple_conquest_4.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "ripple_destruction_4.png",
+   "Name": "Ripple",
+   "Type": "Destruction",
+   "Players": 4,
+   "ImageURL": "images/maps/ripple_destruction_4.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "rocks_conquest_6.png",
+   "Name": "Rocks",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/rocks_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "rocks_destruction_6.png",
+   "Name": "Rocks",
+   "Type": "Destruction",
+   "Players": 6,
+   "ImageURL": "images/maps/rocks_destruction_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "triplestrike_conquest_6.png",
+   "Name": "Triple Strike",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/triplestrike_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "triplestrike_destruction_6.png",
+   "Name": "Triple Strike",
+   "Type": "Destruction",
+   "Players": 6,
+   "ImageURL": "images/maps/triplestrike_destruction_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "twincities_conquest_6.png",
+   "Name": "Twin Cities",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/twincities_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "twincities_destruction_6.png",
+   "Name": "Twin Cities",
+   "Type": "Destruction",
+   "Players": 6,
+   "ImageURL": "images/maps/twincities_destruction_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "twolakes_destruction_4.png",
+   "Name": "Two Lakes",
+   "Type": "Destruction",
+   "Players": 4,
+   "ImageURL": "images/maps/twolakes_destruction_4.png",
+   "RankedPool": true
+ },
+ {
+   "Image": "twolakes_conquest_4.png",
+   "Name": "Two Lakes",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/twolakes_conquest_4.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "twoways_conquest_4.png",
+   "Name": "Two Ways",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/twoways_conquest_4.png",
+   "RankedPool": true
+ },
+ {
+   "Image": "twoways_conquest_6.png",
+   "Name": "Two Ways",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/twoways_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "twoways_destruction_4.png",
+   "Name": "Two Ways",
+   "Type": "Destruction",
+   "Players": 4,
+   "ImageURL": "images/maps/twoways_destruction_4.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "vertigo_conquest_4.png",
+   "Name": "Vertigo",
+   "Type": "Conquest",
+   "Players": 4,
+   "ImageURL": "images/maps/vertigo_conquest_4.png",
+   "RankedPool": true
+ },
+ {
+   "Image": "vertigo_destruction_4.png",
+   "Name": "Vertigo",
+   "Type": "Destruction",
+   "Players": 4,
+   "ImageURL": "images/maps/vertigo_destruction_4.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "volcano_conquest_6.png",
+   "Name": "Volcano",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "images/maps/volcano_conquest_6.png",
+   "RankedPool": false
+ },
+ {
+   "Image": "volcano_destruction_6.png",
+   "Name": "Volcano",
+   "Type": "Destruction",
+   "Players": 6,
+   "ImageURL": "images/maps/volcano_destruction_6.png",
+   "RankedPool": false
+ }
+]
