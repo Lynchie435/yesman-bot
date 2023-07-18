@@ -18,6 +18,7 @@ class WarYes(commands.Cog):
     def __init__(self, bot: discord.Bot):
         self.bot = bot.user
 
+    # Set slashcommand group and sub groups
     grp = discord.SlashCommandGroup("waryes", "This is a collection of waryes commands")
     unitgrp = grp.create_subgroup("units", "A list of unit commands")
     mapgrp = grp.create_subgroup("maps", "A list of map commands")
@@ -79,20 +80,25 @@ class WarYes(commands.Cog):
 
     @mapgrp.command(
         guild_ids=["601387976370683906"],
-        description="")
+        description="Randomly select a map from the ranked 1 v 1 pool.")
     @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
     async def getranked(self, ctx: ctx_parse):
         try:
+
+            # reads maplist json
             mapdf = pd.read_json('./resources/maplist.json')
             df = mapdf.loc[mapdf['RankedPool'] == True]
 
+            # gets an image name at random
             map = random.choice(list(df["Image"].drop_duplicates().sort_values()))
 
+            # uses image name to return full row from data frame
             df = mapdf.loc[(mapdf['Image'] == f'{map}')]
 
             imageurl = df['ImageURL'].iloc[0]
             mapname = df['Name'].iloc[0]
 
+            # populate and response with embed.
             embedvar = discord.Embed(title=f"You have drawn {mapname}!",
                     colour=discord.Colour.random())
             embedvar.set_image(url=f"https://war-yes.com/{imageurl}")
@@ -103,7 +109,7 @@ class WarYes(commands.Cog):
 
     @mapgrp.command(
         guild_ids=["601387976370683906"],
-        description="")
+        description="Get a top down image of the map area")
     @option("gametype", description="WARNO Game Mode",
             autocomplete=basic_autocomplete(gametypeAutocomplete))
     @option("playerno", description="Max Players",
@@ -114,9 +120,12 @@ class WarYes(commands.Cog):
     async def getoverview(self, ctx: ctx_parse,
                      gametype: str, playerno: int, mapname: str):
         try:
+            # get map from maplist and retrieve imageurl
             mapdf = pd.read_json('./resources/maplist.json')
             df = mapdf.loc[
                 (mapdf['Type'] == f'{gametype}') & (mapdf['Players'] == playerno) & (mapdf['Name'] == f'{mapname}')]
+
+            # concatenant image url and post
             url = f"https://war-yes.com/{df['ImageURL'].iloc[0]}"
 
             await ctx.respond(f"{url}")
@@ -125,25 +134,28 @@ class WarYes(commands.Cog):
 
     @unitgrp.command(
         guild_ids=["601387976370683906"],
-        description="")
-    @option("unit", description="The unit you wish to retrieve details for.",
+        description="Returns an embed with high level unit statistics")
+    @option("unit", description="You must use the Eugen stated unit name",
             autocomplete=basic_autocomplete(unitAutocomplete))
     @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
     async def getunit(self, ctx: ctx_parse,
                       unit: str):
         try:
 
+            # parses the unit name and country from the message
             unitname = unit.split(':')[0].rstrip()
             unitcountry = re.search(r"\:([A-Za-z0-9_]+)\:", unit).group(1)
 
-            # global unitarray
+            # gets the json array that matches the above variables
             unitarray = next(
                 (item for item in units if
                  item["name"] == unitname and item['unitType']['motherCountry'] == unitcountry),
                 None)
 
+            # if the array is not empty
             if unitarray is not None:
 
+                # populate embad titles and author link
                 embedvar = discord.Embed(
                     title=f"{unitarray['name']} {self.get_flag(unitarray['unitType']['motherCountry'])}",
                     colour=discord.Colour.random())
@@ -168,11 +180,11 @@ class WarYes(commands.Cog):
                 # add general data to embed
                 embedvar.add_field(name="General", value="")
                 embedvar.add_field(name="", value=f"**Divisions**: {divisions}"
-                                                  f"\n**Points**: {unitarray['commandPoints']} | **Strength**: {unitarray['maxDamage']} | **Optics[Air]**: {unitarray['optics']} [{unitarray['airOptics']}] "
+                                                  f"\n**Points**: {unitarray['commandPoints']} | **Strength**: {unitarray['maxDamage']} | **Optics[Air]**: {self.calc_optics(unitarray['optics'])} [{unitarray['airOptics']}] "
                                                   f"\n**Speed (Road/OffRoad)**: {unitarray['roadSpeed']}/{unitarray['speed']}km/h | **Stealth**: {self.calc_stealth(unitarray['stealth'])}",
                                    inline=False)
 
-                # add armour values if a vehicle
+                # add additional values based on infoPanelType (Unit Type)
                 if unitarray['infoPanelType'] == 'default':
                     embedvar.add_field(name="",
                                        value=f"**Armour**: Front: {unitarray['frontArmor']} | Side: {unitarray['sideArmor']} | Rear: {unitarray['rearArmor']} | Top: {unitarray['topArmor']}"
@@ -215,6 +227,21 @@ class WarYes(commands.Cog):
             case 2:
                 return 'Good'
             case 2.5:
+                return 'Exceptional'
+
+    def calc_optics(selfself, opticsvalue):
+        match opticsvalue:
+            case 42.45:
+                return 'Bad'
+            case 63.675:
+                return 'Mediocre'
+            case 84.9:
+                return 'Normal'
+            case 127.35:
+                return 'Good'
+            case 191.025:
+                return 'Very Good'
+            case 233.475:
                 return 'Exceptional'
 
     def get_divisionicon(self, division):
@@ -264,6 +291,8 @@ class WarYes(commands.Cog):
         return 'None'
 
     def get_flag(self, nation):
+
+        # codes are as per the WarYes discord.
         match nation:
             case 'DDR':
                 return '<:ddr:1129317328270655608>'
