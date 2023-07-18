@@ -86,9 +86,18 @@ class WarYes(commands.Cog):
             mapdf = pd.read_json('./resources/maplist.json')
             df = mapdf.loc[mapdf['RankedPool'] == True]
 
-            map = random.choice(list(df["Name"].drop_duplicates().sort_values()))
+            map = random.choice(list(df["Image"].drop_duplicates().sort_values()))
 
-            await ctx.respond(f"You have drawn **{map}**")
+            df = mapdf.loc[(mapdf['Image'] == f'{map}')]
+
+            imageurl = df['ImageURL'].iloc[0]
+            mapname = df['Name'].iloc[0]
+
+            embedvar = discord.Embed(title=f"You have drawn {mapname}!",
+                    colour=discord.Colour.random())
+            embedvar.set_image(url=f"https://war-yes.com/{imageurl}")
+
+            await ctx.respond(embed=embedvar)
         except Exception as e:
             print(e)
 
