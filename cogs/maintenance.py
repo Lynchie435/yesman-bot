@@ -8,9 +8,11 @@ class Maintenance(commands.Cog):
     def __init__(self, bot):  # this is a special method that is called when the cog is loaded
         self.bot = bot
 
-    grp = discord.SlashCommandGroup("maint", "This is a collection of maintenance commands")
+    grp = discord.SlashCommandGroup("admin", "This is a collection of admin/bot commands")
+    botgrp = grp.create_subgroup("bot", "A list of commands related to the bot")
 
-    @grp.command(name="ping", description="Ping the bot")
+
+    @botgrp.command(name="ping", description="Ping the bot")
     @commands.has_any_role('WARYES DEVELOPER')
     async def ping(self, ctx):
         try:
@@ -19,7 +21,7 @@ class Maintenance(commands.Cog):
             print(e)
 
 
-    @grp.command(name="update_cache",description="Update file cache from the website")
+    @botgrp.command(name="update_units_file_cache",description="Update unit JSON from the WarYes website.")
     @commands.has_any_role('WARYES DEVELOPER')
     async def update(self, ctx):
         try:
