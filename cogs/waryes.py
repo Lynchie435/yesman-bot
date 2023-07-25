@@ -9,7 +9,7 @@ from discord import option
 from discord.ext import commands
 from discord.utils import basic_autocomplete
 import pandas as pd
-from raw import lookups as lkp, functions as fu
+from raw import lookups as lkp
 
 units = []
 
