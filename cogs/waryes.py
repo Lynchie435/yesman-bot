@@ -9,8 +9,10 @@ from discord import option
 from discord.ext import commands
 from discord.utils import basic_autocomplete
 import pandas as pd
+from raw import lookups as lkp, functions as fu
 
 units = []
+
 
 class WarYes(commands.Cog):
     ctx_parse = discord.ApplicationContext
@@ -26,7 +28,7 @@ class WarYes(commands.Cog):
     @staticmethod
     def gametypeAutocomplete(self: discord.AutocompleteContext):
         try:
-            mapdf = pd.read_json('./resources/maplist.json')
+            mapdf = pd.read_json('./resources/maps.json')
             df = mapdf
             gametypelist = list(df["Type"].drop_duplicates())
             return gametypelist
@@ -38,7 +40,7 @@ class WarYes(commands.Cog):
         try:
             chosen_game_type = self.options.get('gametype')
 
-            mapdf = pd.read_json('./resources/maplist.json')
+            mapdf = pd.read_json('./resources/maps.json')
             df = mapdf
             df = df.loc[df['Type'] == f'{chosen_game_type}']
 
@@ -53,7 +55,7 @@ class WarYes(commands.Cog):
             chosen_game_type = self.options.get('gametype')
             chosen_player_no = self.options.get('playerno')
 
-            mapdf = pd.read_json('./resources/maplist.json')
+            mapdf = pd.read_json('./resources/maps.json')
             df = mapdf
             df = df.loc[(df['Type'] == f'{chosen_game_type}') & (df['Players'] == chosen_player_no)]
 
@@ -86,7 +88,7 @@ class WarYes(commands.Cog):
         try:
 
             # reads maplist json
-            mapdf = pd.read_json('./resources/maplist.json')
+            mapdf = pd.read_json('./resources/maps.json')
             df = mapdf.loc[mapdf['RankedPool'] == True]
 
             # gets an image name at random
@@ -109,7 +111,7 @@ class WarYes(commands.Cog):
 
     @mapgrp.command(
         guild_ids=["601387976370683906"],
-        description="Get a top down image of the map area")
+        description="Get a top down image of the map area and cap zones")
     @option("gametype", description="WARNO Game Mode",
             autocomplete=basic_autocomplete(gametypeAutocomplete))
     @option("playerno", description="Max Players",
@@ -121,11 +123,11 @@ class WarYes(commands.Cog):
                      gametype: str, playerno: int, mapname: str):
         try:
             # get map from maplist and retrieve imageurl
-            mapdf = pd.read_json('./resources/maplist.json')
+            mapdf = pd.read_json('./resources/maps.json')
             df = mapdf.loc[
                 (mapdf['Type'] == f'{gametype}') & (mapdf['Players'] == playerno) & (mapdf['Name'] == f'{mapname}')]
 
-            # concatenant image url and post
+            # concat image url and post
             url = f"https://war-yes.com/{df['ImageURL'].iloc[0]}"
 
             await ctx.respond(f"{url}")
@@ -155,9 +157,16 @@ class WarYes(commands.Cog):
             # if the array is not empty
             if unitarray is not None:
 
-                # populate embad titles and author link
+                # gets the div and nation emoji's from the divisions file
+                with open('./resources/divisions.json', 'r') as file:
+                    json_data = json.load(file)
+                    combined_array = json_data.get("nato", []) + json_data.get("pact", [])
+                    divlist = {item["descriptor"]: item["division_emoji"] for item in combined_array}
+                    nationlist = {item["nation"]: item["nation_emoji"] for item in combined_array}
+
+                # populate embed titles and author link
                 embedvar = discord.Embed(
-                    title=f"{unitarray['name']} {self.get_flag(unitarray['unitType']['motherCountry'])}",
+                    title=f"{unitarray['name']} {nationlist.get(unitarray['unitType']['motherCountry'],'')}",
                     colour=discord.Colour.random())
                 embedvar.set_author(name=f"Click Here For More Details!",
                                     url=f"https://war-yes.com/unit/{unitarray['descriptorName']}",
@@ -175,13 +184,13 @@ class WarYes(commands.Cog):
                 # get divisions unit belongs to
                 divisions = ''
                 for division in unitarray['divisions']:
-                    divisions += self.get_divisionicon(division)
+                    divisions += divlist.get(division,'')
 
                 # add general data to embed
                 embedvar.add_field(name="General", value="")
                 embedvar.add_field(name="", value=f"**Divisions**: {divisions}"
-                                                  f"\n**Points**: {unitarray['commandPoints']} | **Strength**: {unitarray['maxDamage']} | **Optics[Air]**: {self.calc_optics(unitarray['optics'])} [{unitarray['airOptics']}] "
-                                                  f"\n**Speed (Road/OffRoad)**: {unitarray['roadSpeed']}/{unitarray['speed']}km/h | **Stealth**: {self.calc_stealth(unitarray['stealth'])}",
+                                                  f"\n**Points**: {unitarray['commandPoints']} | **Strength**: {unitarray['maxDamage']} | **Optics[Air]**: {lkp.optics.get(unitarray['optics'],'Unknown')} [{unitarray['airOptics']}] "
+                                                  f"\n**Speed (Road/OffRoad)**: {unitarray['roadSpeed']}/{unitarray['speed']}km/h | **Stealth**: {lkp.stealth.get(unitarray['stealth'], 'Unknown')}",
                                    inline=False)
 
                 # add additional values based on infoPanelType (Unit Type)
@@ -208,7 +217,7 @@ class WarYes(commands.Cog):
                         traits = '|'.join(filter(None, weapon['traits']))
 
                         embedvar.add_field(name="",
-                                           value=f"**{weapon['weaponName']} [{self.get_weapontype(weapon['minMaxCategory'])}] ** \n **Traits**: {traits} \n **Range**: GRD: {weapon['groundRange']}m | HELO: {weapon['helicopterRange']}m | AIR: {weapon['planeRange']}m "
+                                           value=f"**{weapon['weaponName']} [{lkp.weapontype.get(weapon['minMaxCategory'], 'Unknown')}] ** \n **Traits**: {traits} \n **Range**: GRD: {weapon['groundRange']}m | HELO: {weapon['helicopterRange']}m | AIR: {weapon['planeRange']}m"
                                                  f"\n**Power**: AP: {weapon['penetration']} | HE: {weapon['he']} "
                                                  f"\n**Accuracy**: Static: {weapon['staticAccuracy']}% | Moving: {weapon['movingAccuracy']}%"
                                                  f"\n**Attribs**: RoF: {weapon['rateOfFire']} p/min | Aim: {weapon['aimingTime']}s | Reload: {weapon['reloadTime']}s | Salvo: {weapon['salvoLength']}",
@@ -217,127 +226,6 @@ class WarYes(commands.Cog):
                 await ctx.respond(file=file, embed=embedvar)
         except Exception as e:
             print(e)
-
-    def calc_stealth(self, stealthvalue):
-        match stealthvalue:
-            case 1:
-                return 'Bad'
-            case 1.5:
-                return 'Mediocre'
-            case 2:
-                return 'Good'
-            case 2.5:
-                return 'Exceptional'
-
-    def calc_optics(selfself, opticsvalue):
-        match opticsvalue:
-            case 42.45:
-                return 'Bad'
-            case 63.675:
-                return 'Mediocre'
-            case 84.9:
-                return 'Normal'
-            case 127.35:
-                return 'Good'
-            case 191.025:
-                return 'Very Good'
-            case 233.475:
-                return 'Exceptional'
-
-    def get_divisionicon(self, division):
-
-        # icon codes are as per the WarYes discord
-        match division:
-            case 'Descriptor_Deck_Division_SOV_35_AirAslt_Brig_multi':
-                return '<:35ya:1073600139144482896>'
-            case 'Descriptor_Deck_Division_SOV_39_Gds_Rifle_multi':
-                return '<:39ya:1073600140419543151>'
-            case 'Descriptor_Deck_Division_SOV_79_Gds_Tank_multi':
-                return '<:79ya:1073600142848049222>'
-            case 'Descriptor_Deck_Division_WP_Unternehmen_Zentrum_multi':
-                return '<:untzen:1073600225408733264>'
-            case 'Descriptor_Deck_Division_RDA_4_MSD_multi':
-                return '<:4mot:1073600127199088651>'
-            case 'Descriptor_Deck_Division_RDA_7_Panzer_multi':
-                return '<:7mot:1073600134149050378>'
-            case 'Descriptor_Deck_Division_RDA_KdA_Bezirk_Erfurt_multi':
-                return '<:kda:1073600228659310652>'
-            case 'Descriptor_Deck_Division_RFA_TerrKdo_Sud_multi':
-                return '<:tks:1073600223068299376>'
-            case 'Descriptor_Deck_Division_US_3rd_Arm_multi':
-                return '<:3rdarmor:1073600125802401852>'
-            case 'Descriptor_Deck_Division_US_8th_Inf_multi':
-                return '<:8thinf:1073600135218598039>'
-            case 'Descriptor_Deck_Division_US_82nd_Airborne_multi':
-                return '<:82nd:1073600144425099265>'
-            case 'Descriptor_Deck_Division_RFA_5_Panzer_multi':
-                return '<:5pz:1073600131775086622>'
-            case 'Descriptor_Deck_Division_RFA_2_PzGrenadier_multi':
-                return '<:2pz:1073600154994749490>'
-            case 'Descriptor_Deck_Division_UK_1st_Armoured_multi':
-                return '<:1starmor:1073600151115018362>'
-            case 'Descriptor_Deck_Division_UK_2nd_Infantry_multi':
-                return '<:2ndinf:1073600227262611506>'
-            case 'Descriptor_Deck_Division_NATO_Garnison_Berlin_multi':
-                return '<:berlincmd:1073600146920714271>'
-            case 'Descriptor_Deck_Division_FR_11e_Para_multi':
-                return '<:11e:1073600137374474270>'
-            case 'Descriptor_Deck_Division_FR_5e_Blindee_multi':
-                return '<:5e:1073600129828929567>'
-            case 'Descriptor_Deck_Division_SOV_119IndTkBrig_multi':
-                return '<:119:1128418744465633351>'
-            case 'Descriptor_Deck_Division_US_11ACR_multi':
-                return '<:11acr:1128418742561427725>'
-        return 'None'
-
-    def get_flag(self, nation):
-
-        # codes are as per the WarYes discord.
-        match nation:
-            case 'DDR':
-                return '<:ddr:1129317328270655608>'
-            case 'US':
-                return ':flag_us:'
-            case 'UK':
-                return ':flag_gb:'
-            case 'SOV':
-                return '<:sov:1129317330468475051>'
-            case 'FR':
-                return ':flag_fr:'
-            case 'RFA':
-                return ':flag_de:'
-
-    def get_weapontype(self, weaponminmax):
-        match weaponminmax:
-            case 'MinMax_SAM':
-                return 'SAM'
-            case 'MinMax_obusier':
-                return 'Howitzer'
-            case 'MinMax_CanonAP':
-                return 'Cannon'
-            case 'MinMax_MMG_HMG':
-                return 'MMG/HMG'
-            case 'MinMax_Mortier':
-                return 'Mortar'
-            case 'MinMax_ATGM':
-                return 'ATGM'
-            case 'MinMax_AutocanonHE':
-                return 'Autocannon'
-            case 'MinMax_DCA':
-                return 'SPAAG'
-            case 'MinMax_inf_MMG':
-                return 'Small Arms'
-            case 'MinMax_LAW':
-                return 'Antitank'
-            case 'MinMax_Grenade':
-                return 'Grenade'
-            case 'MinMax_MLRS':
-                return 'MLRS'
-            case 'MinMax_FLAME':
-                return 'Flamethrower'
-            case 'MinMax_inf_sniper':
-                return 'Sniper Rifle'
-        return 'UKN'
 
     async def resize_image_from_url(self, image_url, new_width, new_height):
         response = requests.get(image_url)

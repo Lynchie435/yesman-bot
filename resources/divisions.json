@@ -1,0 +1,188 @@
+{
+  "nato": [
+    {
+      "id": 25,
+      "name": "11e Division Parachutiste",
+      "alias": "11e",
+      "nation": "FR",
+      "nation_emoji": ":flag_fr:",
+      "descriptor": "Descriptor_Deck_Division_FR_11e_Para_multi",
+      "division_emoji": "<:11e:1073600137374474270>"
+    },
+    {
+      "id": 26,
+      "name": "5e Division Blindée",
+      "alias": "5db",
+      "nation": "FR",
+      "nation_emoji": ":flag_fr:",
+      "descriptor": "Descriptor_Deck_Division_FR_5e_Blindee_multi",
+      "division_emoji": "<:5e:1073600129828929567>"
+    },
+    {
+      "id": 29,
+      "name": "1st Armoured Division",
+      "alias": "1AD",
+      "nation": "UK",
+      "nation_emoji": ":flag_gb:",
+      "descriptor": "Descriptor_Deck_Division_UK_1st_Armoured_multi",
+      "division_emoji": "<:1starmor:1073600151115018362>"
+    },
+    {
+      "id": 30,
+      "name": "2nd Infantry Division",
+      "alias": "2ID",
+      "nation": "UK",
+      "nation_emoji": ":flag_gb:",
+      "descriptor": "Descriptor_Deck_Division_UK_2nd_Infantry_multi",
+      "division_emoji": "<:2ndinf:1073600227262611506>"
+    },
+    {
+      "id": 15,
+      "name": "Berlin Command",
+      "alias": "BER",
+      "nation": "UK",
+      "nation_emoji": ":flag_gb:",
+      "descriptor": "Descriptor_Deck_Division_NATO_Garnison_Berlin_multi",
+      "division_emoji": "<:berlincmd:1073600146920714271>"
+    },
+    {
+      "id": 20,
+      "name": "2nd Panzergrenadier",
+      "alias": "2PG",
+      "nation": "RFA",
+      "nation_emoji": ":flag_de:",
+      "descriptor": "Descriptor_Deck_Division_RFA_2_PzGrenadier_multi",
+      "division_emoji": "<:2pz:1073600154994749490>"
+    },
+    {
+      "id": 10,
+      "name": "5th Panzer",
+      "alias": "5PZ",
+      "nation": "RFA",
+      "nation_emoji": ":flag_de:",
+      "descriptor": "Descriptor_Deck_Division_RFA_5_Panzer_multi",
+      "division_emoji": "<:5pz:1073600131775086622>"
+    },
+    {
+      "id": 28,
+      "name": "Territorialkommando Süd",
+      "alias": "TKS",
+      "nation": "RFA",
+      "nation_emoji": ":flag_de:",
+      "descriptor": "Descriptor_Deck_Division_RFA_TerrKdo_Sud_multi",
+      "division_emoji": "<:tks:1073600223068299376>"
+    },
+    {
+      "id": 13,
+      "name": "3rd Armored Division",
+      "alias": "3AD",
+      "nation": "US",
+      "nation_emoji": ":flag_us:",
+      "descriptor": "Descriptor_Deck_Division_US_3rd_Arm_multi",
+      "division_emoji": "<:3rdarmor:1073600125802401852>"
+    },
+    {
+      "id": 14,
+      "name": "8th Infantry Division",
+      "alias": "8ID",
+      "nation": "US",
+      "nation_emoji": ":flag_us:",
+      "descriptor": "Descriptor_Deck_Division_US_8th_Inf_multi",
+      "division_emoji": "<:8thinf:1073600135218598039>"
+    },
+    {
+      "id": 24,
+      "name": "82nd Airborne",
+      "alias": "82AB",
+      "nation": "US",
+      "nation_emoji": ":flag_us:",
+      "descriptor": "Descriptor_Deck_Division_US_82nd_Airborne_multi",
+      "division_emoji": "<:82nd:1073600144425099265>"
+    },
+    {
+      "id": 12,
+      "name": "11th Armored Cav Rgt",
+      "alias": "11ACR",
+      "nation": "US",
+      "nation_emoji": ":flag_us:",
+      "descriptor": "Descriptor_Deck_Division_US_11ACR_multi",
+      "division_emoji": "<:11acr:1128418742561427725>"
+    }
+  ],
+  "pact": [
+    {
+      "id": 19,
+      "name": "4th Motorisierte Schützendivision",
+      "alias": "4MSD",
+      "nation": "RDA",
+      "nation_emoji": "<:ddr:1129317328270655608>",
+      "descriptor": "Descriptor_Deck_Division_RDA_4_MSD_multi",
+      "division_emoji": "<:4mot:1073600127199088651>"
+    },
+    {
+      "id": 9,
+      "name": "7th Panzer",
+      "alias": "7PZ",
+      "nation": "RDA",
+      "nation_emoji": "<:ddr:1129317328270655608>",
+      "descriptor": "Descriptor_Deck_Division_RDA_7_Panzer_multi",
+      "division_emoji": "<:7mot:1073600134149050378>"
+    },
+    {
+      "id": 23,
+      "name": "35-ya OG Desantno-Shturmovaya",
+      "alias": "35YA",
+      "nation": "SOV",
+      "nation_emoji": "<:sov:1129317330468475051>",
+      "descriptor": "Descriptor_Deck_Division_SOV_35_AirAslt_Brig_multi",
+      "division_emoji": "<:35ya:1073600139144482896>"
+    },
+    {
+      "id": 17,
+      "name": "39-ya Gv. Strelk. Div",
+      "alias": "39YA",
+      "nation": "SOV",
+      "nation_emoji": "<:sov:1129317330468475051>",
+      "descriptor": "Descriptor_Deck_Division_SOV_39_Gds_Rifle_multi",
+      "division_emoji": "<:39ya:1073600140419543151>"
+    },
+    {
+      "id": 11,
+      "name": "79-ya Gv. Tank",
+      "alias": "79YA",
+      "nation": "SOV",
+      "nation_emoji": "<:sov:1129317330468475051>",
+      "descriptor": "Descriptor_Deck_Division_SOV_79_Gds_Tank_multi",
+      "division_emoji": "<:79ya:1073600142848049222>"
+    },
+    {
+      "alias": "KDA",
+      "id": 27,
+      "name": "K.d.A. Bezirk Erfurt",
+      "nation": "RDA",
+      "nation_emoji": "<:ddr:1129317328270655608>",
+      "descriptor": "Descriptor_Deck_Division_RDA_KdA_Bezirk_Erfurt_multi",
+      "division_emoji": "<:kda:1073600228659310652>"
+    },
+    {
+      "id": 33,
+      "name": "Berliner Gruppierung",
+      "alias": "BG",
+      "nation": "RDA",
+      "nation_emoji": "<:ddr:1129317328270655608>",
+      "descriptor": "Descriptor_Deck_Division_WP_Unternehmen_Zentrum_multi",
+      "division_emoji": "<:untzen:1073600225408733264>"
+    },
+    {
+      "id": 195,
+      "name": "119-Y Odt. Tank. Polk",
+      "alias": "119Y",
+      "nation": "SOV",
+      "nation_emoji": "<:sov:1129317330468475051>",
+      "descriptor": "Descriptor_Deck_Division_SOV_119IndTkBrig_multi",
+      "division_emoji": "<:119:1128418744465633351>"
+    }
+  ]
+}
+
+

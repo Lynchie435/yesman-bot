@@ -5,7 +5,8 @@
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/blackforest_conquest_4.png",
-   "RankedPool": true
+   "RankedPool": true,
+   "EugenName": "_2x3_BlackForest"
  },
  {
    "Image": "chemical_conquest_4.png",
@@ -13,15 +14,17 @@
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/chemical_conquest_4.png",
-   "RankedPool": true
+   "RankedPool": true,
+   "EugenName": "_4x2_Chemical_2vs2"
  },
  {
    "Image": "chemical_conquest_8.png",
-   "Name": "Chemical",
+   "Name": "Chemical (4v4)",
    "Type": "Conquest",
    "Players": 8,
    "ImageURL": "images/maps/chemical_conquest_8.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_4x2_Chemical"
  },
  {
    "Image": "chemical_destruction_8.png",
@@ -29,7 +32,8 @@
    "Type": "Destruction",
    "Players": 8,
    "ImageURL": "images/maps/chemical_destruction_8.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_4x2_Chemical_4vs4_DEST"
  },
  {
    "Image": "crown_conquest_20.png",
@@ -37,7 +41,8 @@
    "Type": "Conquest",
    "Players": 20,
    "ImageURL": "images/maps/crown_conquest_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_5x2_crown"
  },
  {
    "Image": "crown_destruction_20.png",
@@ -45,31 +50,35 @@
    "Type": "Destruction",
    "Players": 20,
    "ImageURL": "images/maps/crown_destruction_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_5x2_crown_10vs10_DEST"
  },
  {
    "Image": "cyrus_conquest_6.png",
-   "Name": "Cyrus",
+   "Name": "Cyrus (3v3)",
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/cyrus_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_Cyrus"
  },
  {
    "Image": "cyrus_destruction_6.png",
-   "Name": "Cyrus",
+   "Name": "Cyrus (3v3)",
    "Type": "Destruction",
    "Players": 6,
    "ImageURL": "images/maps/cyrus_destruction_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_Cyrus_3vs3_DEST"
  },
  {
    "Image": "dangerhills_conquest_6.png",
-   "Name": "Danger Hills",
+   "Name": "Danger Hills (3v3)",
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/dangerhills_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_DangerHills"
  },
  {
    "Image": "dangerhills_destruction_6.png",
@@ -77,15 +86,17 @@
    "Type": "Destruction",
    "Players": 6,
    "ImageURL": "images/maps/dangerhills_destruction_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_DangerHills_3v3_DE"
  },
  {
    "Image": "darkstream_conquest_8.png",
-   "Name": "Dark Stream",
+   "Name": "Dark Stream (4v4)",
    "Type": "Conquest",
    "Players": 8,
    "ImageURL": "images/maps/darkstream_conquest_8.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_4x2_DarkStream"
  },
  {
    "Image": "darkstream_conquest_20.png",
@@ -93,7 +104,8 @@
    "Type": "Conquest",
    "Players": 20,
    "ImageURL": "images/maps/darkstream_conquest_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": ""
  },
  {
    "Image": "deathrow_conquest_2.png",
@@ -101,23 +113,26 @@
    "Type": "Conquest",
    "Players": 2,
    "ImageURL": "images/maps/deathrow_conquest_2.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_2x3_Death_Row_1vs1"
  },
  {
    "Image": "deathrow_conquest_4.png",
-   "Name": "Death Row",
+   "Name": "Death Row (2v2)",
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/deathrow_conquest_4.png",
-   "RankedPool": true
+   "RankedPool": true,
+   "EugenName": "_2x3_Death_Row"
  },
  {
    "Image": "deathrow_destruction_4.png",
-   "Name": "Death Row",
+   "Name": "Death Row (2v2)",
    "Type": "Destruction",
    "Players": 4,
    "ImageURL": "images/maps/deathrow_destruction_4.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_2x3_Death_Row_2vs2_DEST"
  },
  {
    "Image": "geisa_conquest_2.png",
@@ -125,47 +140,53 @@
    "Type": "Conquest",
    "Players": 2,
    "ImageURL": "images/maps/geisa_conquest_2.png",
-   "RankedPool": true
+   "RankedPool": true,
+   "EugenName": "_4x3_geisa_1vs1"
  },
  {
    "Image": "geisa_conquest_20.png",
-   "Name": "Geisa",
+   "Name": "Geisa (10v10)",
    "Type": "Conquest",
    "Players": 20,
    "ImageURL": "images/maps/geisa_conquest_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_4x3_geisa"
  },
  {
    "Image": "geisa_destruction_20.png",
-   "Name": "Geisa",
+   "Name": "Geisa (10v10)",
    "Type": "Destruction",
    "Players": 20,
    "ImageURL": "images/maps/geisa_destruction_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_4x3_geisa_10vs10_DEST"
  },
  {
    "Image": "ironwaters_conquest_20.png",
-   "Name": "Iron Waters",
+   "Name": "Iron Waters (10v10)",
    "Type": "Conquest",
    "Players": 20,
    "ImageURL": "images/maps/ironwaters_conquest_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_IronWaters"
  },
  {
    "Image": "ironwaters_destruction_20.png",
-   "Name": "Iron Waters",
+   "Name": "Iron Waters (10v10)",
    "Type": "Destruction",
    "Players": 20,
    "ImageURL": "images/maps/ironwaters_destruction_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_IronWaters_10vs10_DEST"
  },
  {
    "Image": "loop_conquest_4.png",
-   "Name": "Loop",
+   "Name": "Loop (2v2)",
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/loop_conquest_4.png",
-   "RankedPool": true
+   "RankedPool": true,
+   "EugenName": "_5x2_Loop_2vs2"
  },
  {
    "Image": "loop_conquest_20.png",
@@ -173,7 +194,8 @@
    "Type": "Conquest",
    "Players": 20,
    "ImageURL": "images/maps/loop_conquest_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": ""
  },
  {
    "Image": "loop_destruction_20.png",
@@ -181,7 +203,8 @@
    "Type": "Destruction",
    "Players": 20,
    "ImageURL": "images/maps/loop_destruction_20.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": ""
  },
  {
    "Image": "mountriver_conquest_2.png",
@@ -189,7 +212,8 @@
    "Type": "Conquest",
    "Players": 2,
    "ImageURL": "images/maps/mountriver_conquest_2.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": ""
  },
  {
    "Image": "mountriver_conquest_4.png",
@@ -197,7 +221,8 @@
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/mountriver_conquest_4.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": " _3x3_IFleuve"
  },
  {
    "Image": "mountriver_conquest_6.png",
@@ -205,7 +230,8 @@
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/mountriver_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": " _3x3_IFleuve"
  },
  {
    "Image": "mountriver_destruction_6.png",
@@ -213,7 +239,8 @@
    "Type": "Destruction",
    "Players": 6,
    "ImageURL": "images/maps/mountriver_destruction_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_IFleuve_3vs3_DEST"
  },
  {
    "Image": "rift_conquest_6.png",
@@ -221,7 +248,8 @@
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/rift_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_Rift"
  },
  {
    "Image": "rift_destruction_6.png",
@@ -229,7 +257,8 @@
    "Type": "Destruction",
    "Players": 6,
    "ImageURL": "images/maps/rift_destruction_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_Rift_3vs3_DEST"
  },
  {
    "Image": "ripple_conquest_4.png",
@@ -237,7 +266,8 @@
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/ripple_conquest_4.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_2x3_Serpent"
  },
  {
    "Image": "ripple_destruction_4.png",
@@ -245,7 +275,8 @@
    "Type": "Destruction",
    "Players": 4,
    "ImageURL": "images/maps/ripple_destruction_4.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_2x3_Serpent_2vs2_DEST"
  },
  {
    "Image": "rocks_conquest_6.png",
@@ -253,7 +284,8 @@
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/rocks_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_Rocks"
  },
  {
    "Image": "rocks_destruction_6.png",
@@ -261,7 +293,8 @@
    "Type": "Destruction",
    "Players": 6,
    "ImageURL": "images/maps/rocks_destruction_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": " _3x3_Rocks_3vs3_DEST"
  },
  {
    "Image": "triplestrike_conquest_6.png",
@@ -269,7 +302,8 @@
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/triplestrike_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_TripleAttaque"
  },
  {
    "Image": "triplestrike_destruction_6.png",
@@ -277,7 +311,8 @@
    "Type": "Destruction",
    "Players": 6,
    "ImageURL": "images/maps/triplestrike_destruction_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_TripleAttaque_3vs3_DEST"
  },
  {
    "Image": "twincities_conquest_6.png",
@@ -285,7 +320,8 @@
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/twincities_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_TwinCities"
  },
  {
    "Image": "twincities_destruction_6.png",
@@ -293,7 +329,8 @@
    "Type": "Destruction",
    "Players": 6,
    "ImageURL": "images/maps/twincities_destruction_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": ""
  },
  {
    "Image": "twolakes_destruction_4.png",
@@ -301,7 +338,8 @@
    "Type": "Destruction",
    "Players": 4,
    "ImageURL": "images/maps/twolakes_destruction_4.png",
-   "RankedPool": true
+   "RankedPool": true,
+   "EugenName": "_3x3_TwinCities_3vs3_DEST"
  },
  {
    "Image": "twolakes_conquest_4.png",
@@ -309,7 +347,8 @@
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/twolakes_conquest_4.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_2x3_Two_lakes"
  },
  {
    "Image": "twoways_conquest_4.png",
@@ -317,7 +356,8 @@
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/twoways_conquest_4.png",
-   "RankedPool": true
+   "RankedPool": true,
+   "EugenName": "_2x3_TwoWays"
  },
  {
    "Image": "twoways_conquest_6.png",
@@ -325,7 +365,8 @@
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/twoways_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_2x3_DeuxCouloirs_3vs3"
  },
  {
    "Image": "twoways_destruction_4.png",
@@ -333,7 +374,8 @@
    "Type": "Destruction",
    "Players": 4,
    "ImageURL": "images/maps/twoways_destruction_4.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_2x3_TwoWays_2vs2_DEST"
  },
  {
    "Image": "vertigo_conquest_4.png",
@@ -341,7 +383,8 @@
    "Type": "Conquest",
    "Players": 4,
    "ImageURL": "images/maps/vertigo_conquest_4.png",
-   "RankedPool": true
+   "RankedPool": true,
+   "EugenName": "_2x3_zigzag"
  },
  {
    "Image": "vertigo_destruction_4.png",
@@ -349,7 +392,8 @@
    "Type": "Destruction",
    "Players": 4,
    "ImageURL": "images/maps/vertigo_destruction_4.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": " _2x3_zigzag_2vs2_DEST"
  },
  {
    "Image": "volcano_conquest_6.png",
@@ -357,7 +401,8 @@
    "Type": "Conquest",
    "Players": 6,
    "ImageURL": "images/maps/volcano_conquest_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_Volcano"
  },
  {
    "Image": "volcano_destruction_6.png",
@@ -365,6 +410,7 @@
    "Type": "Destruction",
    "Players": 6,
    "ImageURL": "images/maps/volcano_destruction_6.png",
-   "RankedPool": false
+   "RankedPool": false,
+   "EugenName": "_3x3_Volcano_3vs3_DEST"
  }
 ]
