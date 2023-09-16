@@ -220,7 +220,8 @@ class WarYes(commands.Cog):
                                            value=f"**{weapon['weaponName']} [{lkp.weapontype.get(weapon['minMaxCategory'], 'Unknown')}] ** \n **Traits**: {traits} \n **Range**: GRD: {weapon['groundRange']}m | HELO: {weapon['helicopterRange']}m | AIR: {weapon['planeRange']}m"
                                                  f"\n**Power**: AP: {weapon['penetration']} | HE: {weapon['he']} "
                                                  f"\n**Accuracy**: Static: {weapon['staticAccuracy']}% | Moving: {weapon['movingAccuracy']}%"
-                                                 f"\n**Attribs**: RoF: {weapon['rateOfFire']} p/min | Aim: {weapon['aimingTime']}s | Reload: {weapon['reloadTime']}s | Salvo: {weapon['salvoLength']}",
+                                                 f"\n**Attribs**: RoF: {weapon['rateOfFire']} p/min | Aim: {weapon['aimingTime']}s | Reload: {weapon['reloadTime']}s | Salvo: {weapon['salvoLength']}"
+                                                 f"\n**Supply Cost**: {weapon['supplyCost']}",
                                            inline=False)
 
                 await ctx.respond(file=file, embed=embedvar)
