@@ -32,7 +32,7 @@ def getDivision(deckcode: str):
     try:
 
         # Read the JSON data from the file
-        with open('../resources/divisions.json', 'r') as file:
+        with open('./resources/divisions.json', 'r') as file:
             data_dict = json.load(file)
 
         # Merge "nato" and "pact" arrays into a single array
@@ -49,11 +49,9 @@ def getDivision(deckcode: str):
         found_item = get_item_by_id(combined_array, item_id_to_find)
 
         if found_item:
-            print(found_item['name'])
+            return found_item['name']
         else:
-            print("Can't find Division")
-
-
+            return "Unknown"
 
     except Exception as e:
         print(e)
