@@ -222,7 +222,7 @@
    "Players": 4,
    "ImageURL": "images/maps/mountriver_conquest_4.png",
    "RankedPool": false,
-   "EugenName": " _3x3_IFleuve"
+   "EugenName": "_3x3_IFleuve"
  },
  {
    "Image": "mountriver_conquest_6.png",
@@ -231,7 +231,7 @@
    "Players": 6,
    "ImageURL": "images/maps/mountriver_conquest_6.png",
    "RankedPool": false,
-   "EugenName": " _3x3_IFleuve"
+   "EugenName": "_3x3_IFleuve"
  },
  {
    "Image": "mountriver_destruction_6.png",
@@ -294,7 +294,7 @@
    "Players": 6,
    "ImageURL": "images/maps/rocks_destruction_6.png",
    "RankedPool": false,
-   "EugenName": " _3x3_Rocks_3vs3_DEST"
+   "EugenName": "_3x3_Rocks_3vs3_DEST"
  },
  {
    "Image": "triplestrike_conquest_6.png",
@@ -321,7 +321,7 @@
    "Players": 6,
    "ImageURL": "images/maps/twincities_conquest_6.png",
    "RankedPool": false,
-   "EugenName": "_3x3_TwinCities"
+   "EugenName": ""
  },
  {
    "Image": "twincities_destruction_6.png",
@@ -330,7 +330,7 @@
    "Players": 6,
    "ImageURL": "images/maps/twincities_destruction_6.png",
    "RankedPool": false,
-   "EugenName": ""
+   "EugenName": "_3x3_TwinCities_3vs3_DEST"
  },
  {
    "Image": "twolakes_destruction_4.png",
@@ -339,7 +339,7 @@
    "Players": 4,
    "ImageURL": "images/maps/twolakes_destruction_4.png",
    "RankedPool": true,
-   "EugenName": "_3x3_TwinCities_3vs3_DEST"
+   "EugenName": "_2x3_Two_lakes"
  },
  {
    "Image": "twolakes_conquest_4.png",
@@ -393,7 +393,7 @@
    "Players": 4,
    "ImageURL": "images/maps/vertigo_destruction_4.png",
    "RankedPool": false,
-   "EugenName": " _2x3_zigzag_2vs2_DEST"
+   "EugenName": "_2x3_zigzag_2vs2_DEST"
  },
  {
    "Image": "volcano_conquest_6.png",
