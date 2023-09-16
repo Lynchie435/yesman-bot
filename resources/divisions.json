@@ -11,7 +11,7 @@
     },
     {
       "id": 26,
-      "name": "5e Division Blindée",
+      "name": "5e Division Blindee",
       "alias": "5db",
       "nation": "FR",
       "nation_emoji": ":flag_fr:",
@@ -112,7 +112,7 @@
   "pact": [
     {
       "id": 19,
-      "name": "4th Motorisierte Schützendivision",
+      "name": "4th Motorisierte Schutzendivision",
       "alias": "4MSD",
       "nation": "RDA",
       "nation_emoji": "<:ddr:1129317328270655608>",
