@@ -1,4 +1,5 @@
 import json
+import os
 
 import discord
 import raw.functions as fu
@@ -13,11 +14,14 @@ class WARNO(commands.Cog):
 
     def __init__(self, bot: discord.Bot):
         self.bot = bot.user
+        apilist = [str(os.getenv('EUGLBAPI'))]
 
     # Set slashcommand group and sub groups
     grp = discord.SlashCommandGroup("warno", "This is a collection of commands related to WARNO")
     leaderboardgrp = grp.create_subgroup("leaderboard", "A list of leaderboard commands")
     #mapgrp = grp.create_subgroup("maps", "A list of map commands")
+
+
 
     @grp.command(
         guild_ids=["601387976370683906"],
@@ -27,7 +31,7 @@ class WARNO(commands.Cog):
 
     async def getrankedstats(self, ctx: ctx_parse, userid: str):
         try:
-            json_data = fu.get_data_from_api(f"http://178.32.126.73:8080/stats/u29_{userid}") #684602
+            json_data = fu.get_data_from_api(self.apilist + userid) #684602
 
             # Create a Discord embed
             embed = discord.Embed(title="Player Statistics")
