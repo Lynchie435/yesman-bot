@@ -14,7 +14,7 @@ class WARNO(commands.Cog):
 
     def __init__(self, bot: discord.Bot):
         self.bot = bot.user
-        apilist = [str(os.getenv('EUGLBAPI'))]
+        apilist = [str(os.getenv('EUGSTATSAPI'))]
 
     # Set slashcommand group and sub groups
     grp = discord.SlashCommandGroup("warno", "This is a collection of commands related to WARNO")
