@@ -45,4 +45,4 @@ async def on_message(message):
 
 
 # Starts the bot
-bot.run(str(os.getenv('DEVTOKEN')))
+bot.run(str(os.getenv('TOKEN')))
