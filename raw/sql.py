@@ -56,7 +56,7 @@ load_dotenv()
 #     finally:
 #         cursor.close()
 
-def add_replay_to_db(filename, gamejson, playerjson, resultjson, replaysource, messageauthor):
+def add_replay_to_db(filename, gamejson, playerjson, resultjson, replaysource, messageauthor, md5):
     try:
 
         #connection = establish_connection()
@@ -64,7 +64,8 @@ def add_replay_to_db(filename, gamejson, playerjson, resultjson, replaysource, m
         # if connection:
 
             # Define the update query
-        update_query = f"INSERT INTO `yesman`.`replay_raw_data` (`filename`, `game_json`, `player_json`, `result_json`, `replay_source`, `user`) VALUES (%s,%s ,%s ,%s ,%s, %s);"
+        #update_query = f"INSERT INTO `yesman`.`replay_raw_data` (`filename`, `game_json`, `player_json`, `result_json`, `replay_source`, `user`, `md5`) VALUES (%s,%s ,%s ,%s ,%s, %s, %s);"
+        update_query = f"INSERT INTO `yesman`.`replay_raw_data` (`filename`, `game_json`, `player_json`, `result_json`, `replay_source`, `user`, `md5`) VALUES (`{filename}`, `{json.dumps(gamejson)}`,`{json.dumps(playerjson)}`,`{json.dumps(resultjson)}`,`{replaysource}`, `{messageauthor}`, `{md5}`);"
 
         with open("db_log.txt", "a") as file:
             # Append the variable's value to the file
@@ -72,7 +73,7 @@ def add_replay_to_db(filename, gamejson, playerjson, resultjson, replaysource, m
 
             # # Execute the query with parameters
             # cursor = connection.cursor()
-            # cursor.execute(update_query, (filename, json.dumps(gamejson),json.dumps(playerjson),json.dumps(resultjson),replaysource, messageauthor))
+            # cursor.execute(update_query, (filename, json.dumps(gamejson),json.dumps(playerjson),json.dumps(resultjson),replaysource, messageauthor, md5))
             #
             # # Commit the changes
             # connection.commit()
