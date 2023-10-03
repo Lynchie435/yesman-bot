@@ -1,4 +1,6 @@
+import hashlib
 import json
+import os
 
 import requests
 
@@ -34,3 +36,10 @@ def get_distictlist_from_json():
 
     # Print the list of distinct specialities
     print(specialities_list)
+
+
+def calculate_md5_hash(binary_data):
+    md5_hash = hashlib.md5()
+    md5_hash.update(binary_data)
+    md5_hex = md5_hash.hexdigest()
+    return md5_hex
