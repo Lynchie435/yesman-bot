@@ -4,6 +4,7 @@ import raw.lookups as lkp
 import discord
 import parsers.replayParser as rp
 import raw.sql as sql
+from raw.functions import calculate_md5_hash
 from parsers import deckParser
 
 # Define a function called processReplay that takes three parameters: filename, filecontent, and message.
@@ -85,12 +86,14 @@ def processReplay(filename, filecontent, message):
         # Read map data from a JSON file and map Eugen names to human-readable map names.
         with open('./resources/maps.json') as file:
             json_data = file.read()
+
+        original_map_name = gamedata.get("Map")
         maps_list = json.loads(json_data)
         eugen_name_to_name = {map_data['EugenName']: map_data['Name'] for map_data in maps_list}
         map_name = eugen_name_to_name.get(gamedata.get("Map"))
 
         # Add the map name to the embed.
-        embedvar.add_field(name="Map", value=f"{map_name or 'Unknown'}")
+        embedvar.add_field(name="Map", value=f"{map_name or original_map_name}")
 
         # Iterate through player data and add details to the embed.
         for player_data in playersdata:
@@ -108,7 +111,8 @@ def processReplay(filename, filecontent, message):
             embedvar.add_field(name="Deck", value=f"{formatted_link}")
 
         # Add replay data to a SQL database.
-        sql.add_replay_to_db(filename, gamedata, playersdata, resultdata, "Replay Upload", message.author.name)
+        md5 = calculate_md5_hash(filecontent)
+        sql.add_replay_to_db(filename, gamedata, playersdata, resultdata, "Replay Upload", message.author.name, md5)
 
         # Return the Discord embed containing the replay information.
         return embedvar
