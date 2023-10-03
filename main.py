@@ -12,7 +12,7 @@ bot = discord.Bot(intents=intents)
 dotenv.load_dotenv()
 
 # loads cogs
-cogs_list = ['maintenance', 'waryes', 'warno']
+cogs_list = ['maintenance', 'waryes', 'warno', 'match']
 for cog in cogs_list:
     bot.load_extension(f'cogs.{cog}')
 
