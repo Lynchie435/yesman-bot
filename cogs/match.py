@@ -18,17 +18,16 @@ class match(commands.Cog):
         guild_ids=["601387976370683906"],
         description="Flip A Coin for Heads or Tails")
     @commands.has_any_role('WARYES DEVELOPER')
-    @commands.Cog.listener('on_message')
     async def flip(self, ctx: ctx_parse):
         try:
             # List of possible outcomes (heads and tails)
-            outcomes = ["Heads!", "Tails!"]
+            outcomes = ["Heads", "Tails"]
 
             # Perform the coin flip
             coin_flip_result = random.choice(outcomes)
 
             # Print the result
-            await ctx.respond(f"{ctx.author.mention} - {coin_flip_result}!")
+            await ctx.respond(f"{ctx.author.mention} {coin_flip_result}!")
         except Exception as e:
             print(e)
 
