@@ -182,6 +182,26 @@
       "descriptor": "Descriptor_Deck_Division_SOV_119IndTkBrig_multi",
       "division_emoji": "<:119:1128418744465633351>"
     }
+    ,
+    {
+      "id": 208,
+      "name": "24th Infantry Division",
+      "alias": "24ID",
+      "nation": "US",
+      "nation_emoji": ":flag_us:",
+      "descriptor": "Descriptor_Deck_Division_US_24th_Inf_multi",
+      "division_emoji": ""
+    }
+    ,
+    {
+      "id": 207,
+      "name": "27-ya Gv. Motostrelk. Div.",
+      "alias": "27YA",
+      "nation": "SOV",
+      "nation_emoji": "<:sov:1129317330468475051>",
+      "descriptor": "Descriptor_Deck_Division_SOV_27_Gds_Rifle_multi",
+      "division_emoji": ""
+    }
   ]
 }
 
