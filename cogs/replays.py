@@ -1,5 +1,6 @@
 # Import necessary libraries and modules
 import json
+import urllib.parse
 import raw.lookups as lkp
 import discord
 import parsers.replayParser as rp
@@ -99,7 +100,7 @@ def processReplay(filename, filecontent, message):
         for player_data in playersdata:
             embedvar.add_field(name="------------------------------------", value=f"", inline=False)
             link_label = "View on WarYes"
-            link_url = f"https://war-yes.com/deck-builder?code={player_data.get('PlayerDeckContent')}"
+            link_url = f"https://war-yes.com/deck-builder?code={urllib.parse.quote(player_data.get('PlayerDeckContent'))}"
             formatted_link = f"[{link_label}]({link_url})"
             embedvar.add_field(
                 name="Player",
@@ -108,6 +109,7 @@ def processReplay(filename, filecontent, message):
             )
             embedvar.add_field(name="ELO", value=f"{player_data.get('PlayerElo')}")
             embedvar.add_field(name="Division", value=f"{deckParser.getDivision(player_data.get('PlayerDeckContent'))}")
+            print(player_data.get('PlayerDeckContent'))
             embedvar.add_field(name="Deck", value=f"{formatted_link}")
 
         # Add replay data to a SQL database.
