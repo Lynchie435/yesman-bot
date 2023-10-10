@@ -8,6 +8,15 @@
    "RankedPool": true,
    "EugenName": "_2x3_BlackForest"
  },
+  {
+   "Image": "blackforest_conquest_2.png",
+   "Name": "Black Forest (Duel)",
+   "Type": "Conquest",
+   "Players": 2,
+   "ImageURL": "images/maps/blackforest_conquest_2.png",
+   "RankedPool": true,
+   "EugenName": "_2x3_BlackForest"
+ },
  {
    "Image": "chemical_conquest_4.png",
    "Name": "Chemical",
@@ -267,7 +276,7 @@
    "Players": 4,
    "ImageURL": "images/maps/ripple_conquest_4.png",
    "RankedPool": false,
-   "EugenName": "_2x3_Serpent"
+   "EugenName": "_2x3_Ripple"
  },
  {
    "Image": "ripple_destruction_4.png",
@@ -384,7 +393,7 @@
    "Players": 4,
    "ImageURL": "images/maps/vertigo_conquest_4.png",
    "RankedPool": true,
-   "EugenName": "_2x3_zigzag"
+   "EugenName": "_2x3_Vertigo"
  },
  {
    "Image": "vertigo_destruction_4.png",
@@ -393,7 +402,7 @@
    "Players": 4,
    "ImageURL": "images/maps/vertigo_destruction_4.png",
    "RankedPool": false,
-   "EugenName": "_2x3_zigzag_2vs2_DEST"
+   "EugenName": "_2x3_Vertigo_DEST"
  },
  {
    "Image": "volcano_conquest_6.png",
@@ -412,5 +421,14 @@
    "ImageURL": "images/maps/volcano_destruction_6.png",
    "RankedPool": false,
    "EugenName": "_3x3_Volcano_3vs3_DEST"
+ },
+ {
+   "Image": "",
+   "Name": "Airport (Duel)",
+   "Type": "Conquest",
+   "Players": 2,
+   "ImageURL": "",
+   "RankedPool": true,
+   "EugenName": "_3x3_Airport_1vs1_DUEL"
  }
 ]
