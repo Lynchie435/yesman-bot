@@ -8,6 +8,7 @@ import raw.sql as sql
 from raw.functions import calculate_md5_hash
 from parsers import deckParser
 
+
 # Define a function called processReplay that takes three parameters: filename, filecontent, and message.
 def processReplay(filename, filecontent, message):
     try:
@@ -44,30 +45,71 @@ def processReplay(filename, filecontent, message):
         loserlist = []
 
         # Get the alliance and victory data for the replay owner.
-        owneralliance = int(resultdata.get("OwnerAlliance", 9))
+        owneralliance = int(resultdata.get("OwnerAlliance", 0))
         ownervictory = int(resultdata.get('Victory', 0))
 
-        # Determine the owner's alliance based on the number of players in the game.
-        if len(playersdata) == 4 and owneralliance in [2, 3]:
-            owneralliance = 1
-        elif len(playersdata) == 6 and owneralliance in [3, 4, 5]:
-            owneralliance = 1
-        elif len(playersdata) == 8 and owneralliance in [4, 5, 6, 7]:
-            owneralliance = 1
-
-        # Categorize players into winners and losers based on their alliance and victory status.
-        for player_data in playersdata:
-            player_alliance = int(player_data.get("PlayerAlliance", 9))
-            if player_alliance == owneralliance:
-                if ownervictory >= 3:
-                    winnerlist.append(player_data)
-                else:
-                    loserlist.append(player_data)
-            else:
-                if ownervictory < 3:
-                    winnerlist.append(player_data)
-                else:
-                    loserlist.append(player_data)
+        if ownervictory < 3:
+            for player in playersdata:
+                if len(playersdata) == 2:
+                    if owneralliance == int(player['PlayerAlliance']):
+                        loserlist.append(player)
+                    else:
+                        winnerlist.append(player)
+                elif len(playersdata) == 4:
+                    replayPlayer = 0
+                    if owneralliance == 2 or owneralliance == 3:
+                        replayPlayer = 1
+                    if replayPlayer == int(player['PlayerAlliance']):
+                        loserlist.append(player)
+                    else:
+                        winnerlist.append(player)
+                elif len(playersdata) == 6:
+                    replayPlayer = 0
+                    if owneralliance == 3 or owneralliance == 4 or owneralliance == 4:
+                        replayPlayer = 1
+                    if replayPlayer == int(player['PlayerAlliance']):
+                        loserlist.append(player)
+                    else:
+                        winnerlist.append(player)
+                elif len(playersdata) == 8:
+                    replayPlayer = 0
+                    if owneralliance == 4 or owneralliance == 5 or owneralliance == 6 or owneralliance == 7:
+                        replayPlayer = 1
+                    if replayPlayer == int(player['PlayerAlliance']):
+                        loserlist.append(player)
+                    else:
+                        winnerlist.append(player)
+        elif ownervictory >= 3:
+            for player in playersdata:
+                if len(playersdata) == 2:
+                    if owneralliance != int(player['PlayerAlliance']):
+                        loserlist.append(player)
+                    else:
+                        winnerlist.append(player)
+                elif len(playersdata) == 4:
+                    replayPlayer = 0
+                    if owneralliance == 2 or owneralliance == 3:
+                        replayPlayer = 1
+                    if replayPlayer != int(player['PlayerAlliance']):
+                        loserlist.append(player)
+                    else:
+                        winnerlist.append(player)
+                elif len(playersdata) == 6:
+                    replayPlayer = 0
+                    if owneralliance == 3 or owneralliance == 4 or owneralliance == 4:
+                        replayPlayer = 1
+                    if replayPlayer != int(player['PlayerAlliance']):
+                        loserlist.append(player)
+                    else:
+                        winnerlist.append(player)
+                elif len(playersdata) == 8:
+                    replayPlayer = 0
+                    if owneralliance == 4 or owneralliance == 5 or owneralliance == 6 or owneralliance == 7:
+                        replayPlayer = 1
+                    if replayPlayer != int(player['PlayerAlliance']):
+                        loserlist.append(player)
+                    else:
+                        winnerlist.append(player)
 
         # Concatenate winner and loser names for embedding.
         winners = "".join(["||" + winners.get("PlayerName", "") + "||\n" for winners in winnerlist])
@@ -109,7 +151,6 @@ def processReplay(filename, filecontent, message):
             )
             embedvar.add_field(name="ELO", value=f"{player_data.get('PlayerElo')}")
             embedvar.add_field(name="Division", value=f"{deckParser.getDivision(player_data.get('PlayerDeckContent'))}")
-            print(player_data.get('PlayerDeckContent'))
             embedvar.add_field(name="Deck", value=f"{formatted_link}")
 
         # Add replay data to a SQL database.
