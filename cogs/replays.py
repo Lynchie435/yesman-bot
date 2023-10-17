@@ -65,7 +65,7 @@ def processReplay(filename, filecontent, message):
                         winnerlist.append(player)
                 elif len(playersdata) == 6:
                     replayPlayer = 0
-                    if owneralliance == 3 or owneralliance == 4 or owneralliance == 4:
+                    if owneralliance == 3 or owneralliance == 4:
                         replayPlayer = 1
                     if replayPlayer == int(player['PlayerAlliance']):
                         loserlist.append(player)
