@@ -9,6 +9,12 @@ from raw.functions import calculate_md5_hash
 from parsers import deckParser
 
 
+def append_winlose_list(player, replayPlayer, listA, listB):
+    if replayPlayer == int(player['PlayerAlliance']):
+        listA.append(player)
+    else:
+        listB.append(player)
+
 # Define a function called processReplay that takes three parameters: filename, filecontent, and message.
 def processReplay(filename, filecontent, message):
     try:
@@ -49,67 +55,22 @@ def processReplay(filename, filecontent, message):
         ownervictory = int(resultdata.get('Victory', 0))
 
         if ownervictory < 3:
-            for player in playersdata:
-                if len(playersdata) == 2:
-                    if owneralliance == int(player['PlayerAlliance']):
-                        loserlist.append(player)
-                    else:
-                        winnerlist.append(player)
-                elif len(playersdata) == 4:
-                    replayPlayer = 0
-                    if owneralliance == 2 or owneralliance == 3:
-                        replayPlayer = 1
-                    if replayPlayer == int(player['PlayerAlliance']):
-                        loserlist.append(player)
-                    else:
-                        winnerlist.append(player)
-                elif len(playersdata) == 6:
-                    replayPlayer = 0
-                    if owneralliance == 3 or owneralliance == 4:
-                        replayPlayer = 1
-                    if replayPlayer == int(player['PlayerAlliance']):
-                        loserlist.append(player)
-                    else:
-                        winnerlist.append(player)
-                elif len(playersdata) == 8:
-                    replayPlayer = 0
-                    if owneralliance == 4 or owneralliance == 5 or owneralliance == 6 or owneralliance == 7:
-                        replayPlayer = 1
-                    if replayPlayer == int(player['PlayerAlliance']):
-                        loserlist.append(player)
-                    else:
-                        winnerlist.append(player)
-        elif ownervictory >= 3:
-            for player in playersdata:
-                if len(playersdata) == 2:
-                    if owneralliance != int(player['PlayerAlliance']):
-                        loserlist.append(player)
-                    else:
-                        winnerlist.append(player)
-                elif len(playersdata) == 4:
-                    replayPlayer = 0
-                    if owneralliance == 2 or owneralliance == 3:
-                        replayPlayer = 1
-                    if replayPlayer != int(player['PlayerAlliance']):
-                        loserlist.append(player)
-                    else:
-                        winnerlist.append(player)
-                elif len(playersdata) == 6:
-                    replayPlayer = 0
-                    if owneralliance == 3 or owneralliance == 4 or owneralliance == 4:
-                        replayPlayer = 1
-                    if replayPlayer != int(player['PlayerAlliance']):
-                        loserlist.append(player)
-                    else:
-                        winnerlist.append(player)
-                elif len(playersdata) == 8:
-                    replayPlayer = 0
-                    if owneralliance == 4 or owneralliance == 5 or owneralliance == 6 or owneralliance == 7:
-                        replayPlayer = 1
-                    if replayPlayer != int(player['PlayerAlliance']):
-                        loserlist.append(player)
-                    else:
-                        winnerlist.append(player)
+            listA = loserlist
+            listB = winnerlist
+        else:
+            listA = winnerlist
+            listB = loserlist
+
+        for player in playersdata:
+            if len(playersdata) == 2:
+                replayPlayer = owneralliance
+            elif len(playersdata) == 4:
+                replayPlayer = 1 if owneralliance in [2, 3] else 0
+            elif len(playersdata) == 6:
+                replayPlayer = 1 if owneralliance in [3, 4] else 0
+            elif len(playersdata) == 8:
+                replayPlayer = 1 if owneralliance in [4, 5, 6, 7] else 0
+            append_winlose_list(player, replayPlayer, listA, listB)
 
         # Concatenate winner and loser names for embedding.
         winners = "".join(["||" + winners.get("PlayerName", "") + "||\n" for winners in winnerlist])
