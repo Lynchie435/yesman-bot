@@ -149,7 +149,7 @@
    "Type": "Conquest",
    "Players": 2,
    "ImageURL": "images/maps/geisa_conquest_2.png",
-   "RankedPool": true,
+   "RankedPool": false,
    "EugenName": "_4x3_geisa_1vs1"
  },
  {
@@ -347,7 +347,7 @@
    "Type": "Destruction",
    "Players": 4,
    "ImageURL": "images/maps/twolakes_destruction_4.png",
-   "RankedPool": true,
+   "RankedPool": false,
    "EugenName": "_2x3_Two_lakes"
  },
  {
@@ -430,5 +430,14 @@
    "ImageURL": "",
    "RankedPool": true,
    "EugenName": "_3x3_Airport_1vs1_DUEL"
+ },
+ {
+   "Image": "",
+   "Name": "Airport",
+   "Type": "Conquest",
+   "Players": 6,
+   "ImageURL": "",
+   "RankedPool": false,
+   "EugenName": "_3x3_Airport"
  }
 ]
