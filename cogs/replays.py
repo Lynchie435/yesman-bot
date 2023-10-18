@@ -1,5 +1,6 @@
 # Import necessary libraries and modules
 import json
+import math
 import urllib.parse
 import raw.lookups as lkp
 import discord
@@ -110,7 +111,7 @@ def processReplay(filename, filecontent, message):
                 value=f"{player_data.get('PlayerName')} (UID: {player_data.get('PlayerUserId')})",
                 inline=False
             )
-            embedvar.add_field(name="ELO", value=f"{player_data.get('PlayerElo')}")
+            embedvar.add_field(name="ELO", value=f"{math.ceil(float(player_data.get('PlayerElo')))}")
             embedvar.add_field(name="Division", value=f"{deckParser.getDivision(player_data.get('PlayerDeckContent'))}")
             embedvar.add_field(name="Deck", value=f"{formatted_link}")
 
