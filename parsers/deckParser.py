@@ -2,7 +2,9 @@ import base64
 import json
 import os
 import struct
+import logging
 
+logger = logging.getLogger(__name__)
 
 def getbits(data, s, n):
     byte = s // 8
@@ -54,4 +56,4 @@ def getDivision(deckcode: str):
             return "Unknown"
 
     except Exception as e:
-        print(e)
+        logger.error(f"{e}")

@@ -1,8 +1,11 @@
 import os
-
 import discord
 from discord.ext import commands
 import requests
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 class Maintenance(commands.Cog):
     def __init__(self, bot):  # this is a special method that is called when the cog is loaded
@@ -18,7 +21,7 @@ class Maintenance(commands.Cog):
         try:
             await ctx.respond(f"Latency is {self.bot.latency} ms")
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
 
     @botgrp.command(name="update_units_file_cache",description="Update unit JSON from the WarYes website.")
@@ -30,25 +33,29 @@ class Maintenance(commands.Cog):
             self.download(url=url, dest_folder=destfolder)
             await ctx.respond(f"Updated Unit File Cache!")
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
     def download(self, url: str, dest_folder: str):
-        if not os.path.exists(dest_folder):
-            os.makedirs(dest_folder)  # create folder if it does not exist
+        try:
+            if not os.path.exists(dest_folder):
+                os.makedirs(dest_folder)  # create folder if it does not exist
 
-        filename = "units.json"
-        file_path = os.path.join(dest_folder, filename)
+            filename = "units.json"
+            file_path = os.path.join(dest_folder, filename)
 
-        r = requests.get(url, stream=True)
-        if r.ok:
-            print("saving to", os.path.abspath(file_path))
-            with open(file_path, 'wb') as f:
-                for chunk in r.iter_content(chunk_size=1024 * 8):
-                    if chunk:
-                        f.write(chunk)
-                        f.flush()
-                        os.fsync(f.fileno())
-        else:  # HTTP status code 4XX/5XX
-            print("Download failed: status code {}\n{}".format(r.status_code, r.text))
+            r = requests.get(url, stream=True)
+            if r.ok:
+                print("saving to", os.path.abspath(file_path))
+                with open(file_path, 'wb') as f:
+                    for chunk in r.iter_content(chunk_size=1024 * 8):
+                        if chunk:
+                            f.write(chunk)
+                            f.flush()
+                            os.fsync(f.fileno())
+            else:  # HTTP status code 4XX/5XX
+                #print("Download failed: status code {}\n{}".format(r.status_code, r.text))
+                logger.info("Download failed: status code {}\n{}".format(r.status_code, r.text))
+        except Exception as e:
+            logger.error(f"{e}")
 def setup(bot):
     bot.add_cog(Maintenance(bot))

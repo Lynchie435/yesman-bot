@@ -1,6 +1,7 @@
 import discord
 import os
 import dotenv
+import logging
 import cogs.replays as rpl
 
 # set intents
@@ -16,14 +17,20 @@ cogs_list = ['maintenance', 'waryes', 'warno', 'match']
 for cog in cogs_list:
     bot.load_extension(f'cogs.{cog}')
 
+# set logging
+logging.basicConfig(
+    filename='yesman.log',
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 @bot.event
 async def on_ready():
     try:
         print(f'We have logged in as {bot.user}')
     except Exception as e:
-        print(e)
-
+        logger.error(f"{e}")
 
 @bot.event
 async def on_message(message):
@@ -40,9 +47,9 @@ async def on_message(message):
                     embed = rpl.processReplay(attachment.filename, file_content, message)
                     await message.channel.send(embed=embed)
     except Exception as e:
-        print(e)
+        logger.error(f"{e}")
     #await message.channel.send("Herro!")\
 
 
 # Starts the bot
-bot.run(str(os.getenv('TOKEN')))
+bot.run(str(os.getenv('DEVTOKEN')))

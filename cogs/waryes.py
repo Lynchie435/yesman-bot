@@ -1,8 +1,4 @@
-import io
-import json
-import random
-import re
-import requests
+import io, logging, json, random, re, requests
 from PIL import Image
 import discord
 from discord import option
@@ -12,13 +8,14 @@ import pandas as pd
 from raw import lookups as lkp
 
 units = []
-
+logger = logging.getLogger(__name__)
 
 class WarYes(commands.Cog):
     ctx_parse = discord.ApplicationContext
 
     def __init__(self, bot: discord.Bot):
         self.bot = bot.user
+
 
     # Set slashcommand group and sub groups
     grp = discord.SlashCommandGroup("waryes", "This is a collection of waryes commands")
@@ -33,7 +30,7 @@ class WarYes(commands.Cog):
             gametypelist = list(df["Type"].drop_duplicates())
             return gametypelist
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
     @staticmethod
     def playerNoAutocomplete(self: discord.AutocompleteContext):
@@ -47,7 +44,7 @@ class WarYes(commands.Cog):
             playerno_list = list(df["Players"].drop_duplicates().sort_values())
             return playerno_list
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
     @staticmethod
     def mapnameAutocomplete(self: discord.AutocompleteContext):
@@ -62,7 +59,7 @@ class WarYes(commands.Cog):
             map_list = list(df["Name"].drop_duplicates().sort_values())
             return map_list
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
     @staticmethod
     def unitAutocomplete(self: discord.AutocompleteContext):
@@ -78,12 +75,12 @@ class WarYes(commands.Cog):
             # list of units
             return [f"{sub['name']} :{sub['unitType']['motherCountry']}:" for sub in units]
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
     @mapgrp.command(
         guild_ids=["601387976370683906"],
         description="Randomly select a map from the ranked 1 v 1 pool.")
-    @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
+    @commands.has_any_role('MEMBER')
     async def getranked(self, ctx: ctx_parse):
         try:
 
@@ -107,7 +104,7 @@ class WarYes(commands.Cog):
 
             await ctx.respond(embed=embedvar)
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
     @mapgrp.command(
         guild_ids=["601387976370683906"],
@@ -118,7 +115,7 @@ class WarYes(commands.Cog):
             autocomplete=basic_autocomplete(playerNoAutocomplete))
     @option("mapname", description="Map Name",
             autocomplete=basic_autocomplete(mapnameAutocomplete))
-    @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
+    @commands.has_any_role('MEMBER')
     async def getoverview(self, ctx: ctx_parse,
                      gametype: str, playerno: int, mapname: str):
         try:
@@ -132,14 +129,14 @@ class WarYes(commands.Cog):
 
             await ctx.respond(f"{url}")
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
     @unitgrp.command(
         guild_ids=["601387976370683906"],
         description="Returns an embed with high level unit statistics")
     @option("unit", description="You must use the Eugen stated unit name",
             autocomplete=basic_autocomplete(unitAutocomplete))
-    @commands.has_any_role('WARYES DEVELOPER', 'MEMBER')
+    @commands.has_any_role('MEMBER')
     async def getunit(self, ctx: ctx_parse,
                       unit: str):
         try:
@@ -226,7 +223,7 @@ class WarYes(commands.Cog):
 
                 await ctx.respond(file=file, embed=embedvar)
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
     async def resize_image_from_url(self, image_url, new_width, new_height):
         response = requests.get(image_url)

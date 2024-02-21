@@ -1,5 +1,5 @@
 import json
-
+import logging
 #import mysql.connector
 #from mysql.connector import Error
 from dotenv import load_dotenv
@@ -7,6 +7,7 @@ import os
 
 # Load the environment variables from .env file
 load_dotenv()
+logger = logging.getLogger(__name__)
 
 # def establish_connection():
 #     try:

@@ -8,7 +8,9 @@ import parsers.replayParser as rp
 import raw.sql as sql
 from raw.functions import calculate_md5_hash
 from parsers import deckParser
+import logging
 
+logger = logging.getLogger(__name__)
 
 def append_winlose_list(player, replayPlayer, listA, listB):
     if replayPlayer == int(player['PlayerAlliance']):
@@ -122,4 +124,4 @@ def processReplay(filename, filecontent, message):
         # Return the Discord embed containing the replay information.
         return embedvar
     except Exception as e:
-        print(e)
+        logger.error(f"{e}")

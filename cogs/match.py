@@ -4,7 +4,9 @@ import random
 import discord
 from discord import option
 from discord.ext import commands
+import logging
 
+logger = logging.getLogger(__name__)
 
 class match(commands.Cog):
     ctx_parse = discord.ApplicationContext
@@ -29,7 +31,7 @@ class match(commands.Cog):
             # Print the result
             await ctx.respond(f"{ctx.author.mention} {coin_flip_result}!")
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
 def setup(bot):
     bot.add_cog(match(bot))

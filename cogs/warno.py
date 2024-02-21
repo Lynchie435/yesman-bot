@@ -1,14 +1,13 @@
 import json
 import os
-
 import discord
 import raw.functions as fu
 from discord import option
 from discord.ext import commands
 from discord.utils import basic_autocomplete
+import logging
 
-
-
+logger = logging.getLogger(__name__)
 class WARNO(commands.Cog):
     ctx_parse = discord.ApplicationContext
 
@@ -20,8 +19,6 @@ class WARNO(commands.Cog):
     grp = discord.SlashCommandGroup("warno", "This is a collection of commands related to WARNO")
     leaderboardgrp = grp.create_subgroup("leaderboard", "A list of leaderboard commands")
     #mapgrp = grp.create_subgroup("maps", "A list of map commands")
-
-
 
     @grp.command(
         guild_ids=["601387976370683906"],
@@ -47,8 +44,7 @@ class WARNO(commands.Cog):
                 "@deployment_closequarter_conquest", "@time_skirmish_played", "@time_multi_played",
                 "@time_ranked_played", "@time_menu_played", "@time_armory_played",
                 "ranked_win", "ranked_loss", "ranked_nation_0", "ranked_nation_1", "ranked_last_game",
-                "@skirmish_nato", "@skirmish_pact", "@multi_nato", "@multi_pact",
-                "@skirmish_nato", "@skirmish_pact"
+                "@skirmish_nato", "@skirmish_pact", "@multi_nato", "@multi_pact"
             ]
 
             # Add fields to the embed
@@ -61,7 +57,7 @@ class WARNO(commands.Cog):
             #print(embed.to_dict())
 
         except Exception as e:
-            print(e)
+            logger.error(f"{e}")
 
 def setup(bot):
     bot.add_cog(WARNO(bot))
