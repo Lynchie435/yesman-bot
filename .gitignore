@@ -2,4 +2,4 @@
 /.env
 /resources/units.json
 /db_log.txt
-/yesman.log
+/logs/*

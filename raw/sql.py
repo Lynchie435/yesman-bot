@@ -1,7 +1,5 @@
 import json
 import logging
-#import mysql.connector
-#from mysql.connector import Error
 from dotenv import load_dotenv
 import os
 
@@ -9,31 +7,6 @@ import os
 load_dotenv()
 logger = logging.getLogger(__name__)
 
-# def establish_connection():
-#     try:
-#         # Get the connection string from environment variables
-#         host = os.getenv('MYSQLDBHOST')
-#         database = os.getenv('MYSQLDATABASE')
-#         user = os.getenv('MYSQLDBUSER')
-#         password = os.getenv('MYSQLDBPWD')
-#
-#         # Define the connection parameters
-#         connection_params = {
-#             'host': host,
-#             'database': database,
-#             'user': user,
-#             'password': password
-#         }
-#
-#         # Establish database connection using the connection string
-#         connection = mysql.connector.connect(**connection_params)
-#         if connection.is_connected():
-#             return connection
-#     except Error as e:
-#         print("Error:", e)
-#         return None
-#
-#
 # def add_replay_to_db(filename, gamejson, playerjson, resultjson, replaysource, messageauthor):
 #     try:
 #
