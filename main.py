@@ -12,14 +12,14 @@ def setup_logging():
     if not os.path.exists(log_folder):
         os.makedirs(log_folder)
 
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger('logger')
     logger.setLevel(logging.DEBUG)
 
     log_filepath = os.path.join(log_folder, log_filename)
     handler = TimedRotatingFileHandler(log_filepath, when="D", interval=1, backupCount=7)
     handler.setLevel(logging.DEBUG)
 
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter('%(asctime)s - %(module)s - %(levelname)s - %(funcName)s - %(message)s')
     handler.setFormatter(formatter)
 
     logger.addHandler(handler)
@@ -65,8 +65,6 @@ async def on_message(message):
                     await message.channel.send(embed=embed)
     except Exception as e:
         logger.error(f"{e}")
-    #await message.channel.send("Herro!")\
-
 
 # Starts the bot
 bot.run(str(os.getenv('DEVTOKEN')))
