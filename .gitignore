@@ -3,3 +3,4 @@
 /resources/units.json
 /db_log.txt
 /logs/*
+/database/*

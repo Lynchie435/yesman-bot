@@ -1,60 +1,56 @@
-import json
-import logging
-from dotenv import load_dotenv
+import sqlite3
 import os
+import logging
 
-# Load the environment variables from .env file
-load_dotenv()
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('logger')
 
-# def add_replay_to_db(filename, gamejson, playerjson, resultjson, replaysource, messageauthor):
-#     try:
-#
-#         connection = establish_connection()
-#
-#         if connection:
-#
-#             # Define the update query
-#             update_query = f"INSERT INTO `yesman`.`replay_raw_data` (`filename`, `game_json`, `player_json`, `result_json`, `replay_source`, `user`) VALUES (%s,%s ,%s ,%s ,%s, %s);"
-#
-#             # Execute the query with parameters
-#             cursor = connection.cursor()
-#             cursor.execute(update_query, (filename, json.dumps(gamejson),json.dumps(playerjson),json.dumps(resultjson),replaysource, messageauthor))
-#
-#             # Commit the changes
-#             connection.commit()
-#
-#         print("Update successful")
-#     except Error as e:
-#         print("Error:", e)
-#     finally:
-#         cursor.close()
+def get_database():
+    try:
+        db_path = './database/yesman.db'
 
-def add_replay_to_db(filename, gamejson, playerjson, resultjson, replaysource, messageauthor, md5):
+        # Ensure the directory exists
+        if not os.path.exists(os.path.dirname(db_path)):
+            fullpath = os.path.dirname(db_path)
+            os.makedirs(fullpath)
+            logger.info(f'Database created: {db_path}')
+
+        return db_path
+    except Exception as e:
+        logger.error(e)
+def add_replay_to_db(filename: str, gamejson: str, playerjson: str, resultjson: str, replaysource: str, messageauthor: str, md5: str):
     try:
 
-        #connection = establish_connection()
-        #
-        # if connection:
+        logger.info(f'Adding {filename} to the SQL database')
 
-            # Define the update query
-        #update_query = f"INSERT INTO `yesman`.`replay_raw_data` (`filename`, `game_json`, `player_json`, `result_json`, `replay_source`, `user`, `md5`) VALUES (%s,%s ,%s ,%s ,%s, %s, %s);"
-        update_query = f"INSERT INTO `yesman`.`replay_raw_data` (`filename`, `game_json`, `player_json`, `result_json`, `replay_source`, `user`, `md5`) VALUES (`{filename}`, `{json.dumps(gamejson)}`,`{json.dumps(playerjson)}`,`{json.dumps(resultjson)}`,`{replaysource}`, `{messageauthor}`, `{md5}`);"
+        connection = sqlite3.connect(get_database())
+        cursor = connection.cursor()
 
-        with open("db_log.txt", "a") as file:
-            # Append the variable's value to the file
-            file.write(update_query + "\n")
+        cursor.execute('''CREATE TABLE IF NOT EXISTS replay_raw_data (
+                            id INTEGER PRIMARY KEY,
+                            filename TEXT,
+                            game_json TEXT,
+                            player_json TEXT,
+                            result_json TEXT,
+                            replay_source TEXT,
+                            user TEXT,
+                            md5 TEXT
+                          )''')
 
-            # # Execute the query with parameters
-            # cursor = connection.cursor()
-            # cursor.execute(update_query, (filename, json.dumps(gamejson),json.dumps(playerjson),json.dumps(resultjson),replaysource, messageauthor, md5))
-            #
-            # # Commit the changes
-            # connection.commit()
-    except Exception as e:
-        print(e)
-    #     print("Update successful")
-    # except Error as e:
-    #     print("Error:", e)
-    # finally:
-    #     cursor.close()
+        # INSERT INTO
+        cursor.execute('INSERT INTO replay_raw_data (filename, game_json, player_json, result_json, replay_source, user, md5) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                       (str(filename), str(gamejson), str(playerjson), str(resultjson), str(replaysource), str(messageauthor), str(md5)))
+
+        connection.commit()
+
+        # Fetch and print data
+        cursor.execute('SELECT * FROM replay_raw_data')
+        rows = cursor.fetchall()
+        for row in rows:
+            print(row)
+
+    except sqlite3.Error as er:
+            logger.error(er)
+
+    finally:
+        if connection:
+            connection.close()
