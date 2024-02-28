@@ -93,15 +93,15 @@ def load_json_file(file_path):
         return json.load(file)
 async def startProcessing():
 
-    await get_leaderboard()
-
     while True:
 
+        logger.debug('Downloading Leaderboard...')
+        await get_leaderboard()
         logger.debug('Processing Usernames...')
         await processUsernames()
         logger.debug('Processing Finished...')
 
-        sleeptimer = 60 * 10
+        sleeptimer = 60 * 60 * 24
         logger.debug(f'Sleeping for {sleeptimer} seconds')
 
         await asyncio.sleep(sleeptimer)
@@ -125,7 +125,6 @@ class WARNO(commands.Cog):
 
     async def whois(self, ctx: ctx_parse, username: str):
         try:
-
             return
         except Exception as e:
             logger.error(f"{e}")
