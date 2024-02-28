@@ -80,7 +80,7 @@ async def processUsernames():
                               'rank': str(row["key"]),
                               'elo': math.ceil(float(row["value"]))
                               }
-                             for i, row in enumerate(rows[:1])]
+                             for i, row in enumerate(rows[:500])]
 
             sql.add_usernames_to_db(modified_rows)
         else:
