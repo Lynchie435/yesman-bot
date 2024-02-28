@@ -31,12 +31,10 @@ def processReplay(filename, filecontent, message):
         game = json.dumps(parsedfile[0].get('game'), indent=2)
         gamedata = json.loads(game)
 
-        # Loop through player data (up to 20 times) and parse it, adding it to playersdata.
-        for i in range(20):
-            playerjson = json.dumps(parsedfile[0].get(f'player_{i}'), indent=2)
-            playerdata = json.loads(playerjson)
-            if playerjson != 'null':
-                playersdata.append(playerdata)
+        # Extract and parse player data from the parsedfile.
+        jsondata = json.dumps(parsedfile[0])
+        data = json.loads(jsondata)
+        playersdata = {key: value for key, value in data.items() if key.startswith("player_")}
 
         # Extract and parse result data from parsedfile.
         result = json.dumps(parsedfile[1].get('result'), indent=2)
@@ -64,16 +62,18 @@ def processReplay(filename, filecontent, message):
             listA = winnerlist
             listB = loserlist
 
-        for player in playersdata:
-            if len(playersdata) == 2:
-                replayPlayer = owneralliance
-            elif len(playersdata) == 4:
-                replayPlayer = 1 if owneralliance in [2, 3] else 0
-            elif len(playersdata) == 6:
-                replayPlayer = 1 if owneralliance in [3, 4] else 0
-            elif len(playersdata) == 8:
-                replayPlayer = 1 if owneralliance in [4, 5, 6, 7] else 0
-            append_winlose_list(player, replayPlayer, listA, listB)
+        for player_key, players_data in playersdata.items():
+            if player_key.startswith('player_') and isinstance(players_data, dict):
+                player_data = players_data
+                if len(playersdata) == 2:
+                    replayPlayer = owneralliance
+                elif len(playersdata) == 4:
+                    replayPlayer = 1 if owneralliance in [2, 3] else 0
+                elif len(playersdata) == 6:
+                    replayPlayer = 1 if owneralliance in [3, 4] else 0
+                elif len(playersdata) == 8:
+                    replayPlayer = 1 if owneralliance in [4, 5, 6, 7] else 0
+                append_winlose_list(player_data, replayPlayer, listA, listB)
 
         # Concatenate winner and loser names for embedding.
         winners = "".join(["||" + winners.get("PlayerName", "") + "||\n" for winners in winnerlist])
@@ -103,23 +103,25 @@ def processReplay(filename, filecontent, message):
         embedvar.add_field(name="Map", value=f"{map_name or original_map_name}")
 
         # Iterate through player data and add details to the embed.
-        for player_data in playersdata:
-            embedvar.add_field(name="------------------------------------", value=f"", inline=False)
-            link_label = "View on WarYes"
-            link_url = f"https://war-yes.com/deck-builder?code={urllib.parse.quote(player_data.get('PlayerDeckContent'))}"
-            formatted_link = f"[{link_label}]({link_url})"
-            embedvar.add_field(
-                name="Player",
-                value=f"{player_data.get('PlayerName')} (UID: {player_data.get('PlayerUserId')})",
-                inline=False
-            )
-            embedvar.add_field(name="ELO", value=f"{math.ceil(float(player_data.get('PlayerElo')))}")
-            embedvar.add_field(name="Division", value=f"{deckParser.getDivision(player_data.get('PlayerDeckContent'))}")
-            embedvar.add_field(name="Deck", value=f"{formatted_link}")
+        for player_key, players_data in playersdata.items():
+            if player_key.startswith('player_') and isinstance(players_data, dict):
+                player_data = players_data
+                embedvar.add_field(name="------------------------------------", value=f"", inline=False)
+                link_label = "View on WarYes"
+                link_url = f"https://war-yes.com/deck-builder?code={urllib.parse.quote(player_data.get('PlayerDeckContent'))}"
+                formatted_link = f"[{link_label}]({link_url})"
+                embedvar.add_field(
+                    name="Player",
+                    value=f"{player_data.get('PlayerName')} (UID: {player_data.get('PlayerUserId')})",
+                    inline=False
+                )
+                embedvar.add_field(name="ELO", value=f"{math.ceil(float(player_data.get('PlayerElo')))}")
+                embedvar.add_field(name="Division", value=f"{deckParser.getDivision(player_data.get('PlayerDeckContent'))}")
+                embedvar.add_field(name="Deck", value=f"{formatted_link}")
 
         # Add replay data to a SQL database.
         md5 = calculate_md5_hash(filecontent)
-        sql.add_replay_to_db(filename, gamedata, playersdata, resultdata, "Replay Upload", message.author.name, md5)
+        sql.add_replay_to_db(filename, gamedata, json.dumps(playersdata), resultdata, "Replay Upload", message.author.name, md5)
 
         logger.info(f'Processed replay {filename} that was submitted by {message.author.name}')
         # Return the Discord embed containing the replay information.
