@@ -1,5 +1,4 @@
 import json, math, os, random, re, time, requests
-
 import discord
 from bs4 import BeautifulSoup
 from discord import option
@@ -43,29 +42,35 @@ def extract_unix_timestamp(input_string):
     return float(match.group(1)) if match else None
 
 def get_gamehistory(userid):
+    try:
+        # Generate a random delay between 3 and 6 seconds done to make the calls not look so.....
+        delay_seconds = random.uniform(3, 6)
+        time.sleep(delay_seconds)
 
-    # Generate a random delay between 3 and 6 seconds done to make the calls not look so.....
-    delay_seconds = random.uniform(3, 6)
-    time.sleep(delay_seconds)
+        url = str(os.getenv('EUGNETGHAPI'))
+        url = f'{url}{userid}'
+        response = session.get(url)
 
-    url = str(os.getenv('EUGNETGHAPI'))
-    url = f'{url}{userid}'
-    response = session.get(url)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            game_rows = soup.find_all('tr')
+            for row in game_rows:
+                columns = row.find_all('td')
+                if len(columns) == 3:
+                    game_name = columns[0].text.strip()
+                    if game_name != 'fulda':
+                        return 'No Gamehistory Data'
 
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
-        game_rows = soup.find_all('tr')
-        for row in game_rows:
-            columns = row.find_all('td')
-            if len(columns) == 3:
-                game_name = columns[0].text.strip()
-                if game_name != 'fulda':
-                    return 'No Gamehistory Data'
-                game_link = columns[2].find('a')['href']
-                username = get_username(game_link)
-                return str(username)
-    return None
-
+                    link_element = columns[2].find('a')
+                    if link_element is not None and 'href' in link_element.attrs:
+                        game_link = link_element['href']
+                        username = get_username(game_link)
+                        return str(username)
+                    else:
+                        return "Username Error"
+        return None
+    except Exception as e:
+        logger.error(f"{e}")
 async def processUsernames():
     try:
         data = load_json_file('./resources/leaderboard.json')
@@ -80,7 +85,7 @@ async def processUsernames():
                               'rank': str(row["key"]),
                               'elo': math.ceil(float(row["value"]))
                               }
-                             for i, row in enumerate(rows[:500])]
+                             for i, row in enumerate(rows[:300])]
 
             sql.add_usernames_to_db(modified_rows)
         else:
@@ -95,8 +100,8 @@ async def startProcessing():
 
     while True:
 
-        logger.debug('Downloading Leaderboard...')
         await get_leaderboard()
+        logger.debug('Downloading Leaderboard...')
         logger.debug('Processing Usernames...')
         await processUsernames()
         logger.debug('Processing Finished...')
