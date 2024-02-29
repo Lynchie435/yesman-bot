@@ -42,7 +42,7 @@ bot = setup_bot()
 async def on_ready():
     try:
         logger.debug(f'Bot is logged in as {bot.user}')
-        await wrn.startProcessing()
+        #await wrn.startProcessing()
     except Exception as e:
         logger.error(f"{e}")
 
