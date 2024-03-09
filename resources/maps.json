@@ -69,7 +69,7 @@
    "Players": 6,
    "ImageURL": "images/maps/cyrus_conquest_6.png",
    "RankedPool": false,
-   "EugenName": "_3x3_Cyrus"
+   "EugenName": "_3x3_Cyrus_3vs3_CONQ"
  },
  {
    "Image": "cyrus_destruction_6.png",
@@ -276,7 +276,7 @@
    "Players": 4,
    "ImageURL": "images/maps/ripple_conquest_4.png",
    "RankedPool": false,
-   "EugenName": "_2x3_Ripple"
+   "EugenName": "_2x3_Ripple_2vs2_CONQ"
  },
  {
    "Image": "ripple_destruction_4.png",
@@ -438,6 +438,6 @@
    "Players": 6,
    "ImageURL": "",
    "RankedPool": false,
-   "EugenName": "_3x3_Airport"
+   "EugenName": "_3x3_Airport_3vs3_CONQ"
  }
 ]
