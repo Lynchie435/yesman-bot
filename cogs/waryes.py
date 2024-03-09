@@ -62,7 +62,7 @@ class WarYes(commands.Cog):
             logger.error(f"{e}")
 
     @staticmethod
-    def unitAutocomplete(self: discord.AutocompleteContext):
+    def unitAutocomplete(ctx: discord.AutocompleteContext):
         try:
             with open('./resources/units.json') as f:
                 # load json
@@ -73,7 +73,7 @@ class WarYes(commands.Cog):
                 units = data["units"]
 
             # list of units
-            return [f"{sub['name']} :{sub['unitType']['motherCountry']}:" for sub in units]
+            return [f"{sub['name']} :{sub['unitType']['motherCountry']}:" for sub in units if ctx.value.upper() in sub['name']]
         except Exception as e:
             logger.error(f"{e}")
 
@@ -135,7 +135,7 @@ class WarYes(commands.Cog):
         guild_ids=["601387976370683906"],
         description="Returns an embed with high level unit statistics")
     @option("unit", description="You must use the Eugen stated unit name",
-            autocomplete=basic_autocomplete(unitAutocomplete))
+            autocomplete=unitAutocomplete)
     @commands.has_any_role('MEMBER')
     async def getunit(self, ctx: ctx_parse,
                       unit: str):
