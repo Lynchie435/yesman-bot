@@ -32,7 +32,6 @@ def setup_bot():
     cogs_list = ['maintenance', 'waryes', 'warno', 'match']
     for cog in cogs_list:
         bot.load_extension(f'cogs.{cog}')
-
     return bot
 
 logger = setup_logging()
@@ -42,7 +41,6 @@ bot = setup_bot()
 async def on_ready():
     try:
         logger.debug(f'Bot is logged in as {bot.user}')
-        #await wrn.startProcessing()
     except Exception as e:
         logger.error(f"{e}")
 
