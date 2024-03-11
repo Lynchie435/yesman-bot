@@ -80,9 +80,9 @@ def processReplay(filename, filecontent, message):
         losers = "".join(["||" + losers.get("PlayerName", "") + "||\n" for losers in loserlist])
 
         # Add winner and loser fields to the embed.
-        embedvar.add_field(name="Team 1", value=f"{winners}")
-        embedvar.add_field(name="Team 2", value=f"{losers}")
-        embedvar.add_field(name="Victory Type", value=f"||Team 1 {lkp.victory.get(ownervictory, 9)}||")
+        embedvar.add_field(name="Winner(s)", value=f"{winners}")
+        embedvar.add_field(name="Losers(s)", value=f"{losers}")
+        embedvar.add_field(name="Victory Type", value=f"||{lkp.victory.get(ownervictory, 9)}||")
 
         # Calculate and add the game duration to the embed.
         minutes, seconds = divmod(int(resultdata.get('Duration')), 60)
