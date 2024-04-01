@@ -8,7 +8,7 @@ import pandas as pd
 from raw import lookups as lkp
 
 units = []
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('logger')
 
 class WarYes(commands.Cog):
     ctx_parse = discord.ApplicationContext
