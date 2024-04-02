@@ -1,9 +1,11 @@
-import os
-import discord
-from discord.ext import commands
-import requests
 import logging
+import os
 
+import discord
+import requests
+from discord.ext import commands
+
+from raw import functions as fu
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +30,10 @@ class Maintenance(commands.Cog):
     @commands.has_any_role('WARYES DEVELOPER')
     async def update(self, ctx):
         try:
-            url = 'https://firebasestorage.googleapis.com/v0/b/catur-11410.appspot.com/o/warno%2Funits-and-divisions.json?alt=media'
+            patchdata = fu.get_data_from_api('https://war-yes.com/api/patch/latest')
+            patchname = patchdata['data']['name']
+
+            url = f'https://war-yes.com/static/{patchname}/warno.json'
             destfolder = 'resources'
             self.download(url=url, dest_folder=destfolder)
             await ctx.respond(f"Updated Unit File Cache!")
